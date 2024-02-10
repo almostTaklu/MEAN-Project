@@ -4,21 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><%= title %> </title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        
         <link rel='stylesheet' href="/bootstrap/css/bootstrap.min.css">
+        <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
     <body>
         <div class="container">
             <% include ./navbar %>
 
         <h1 class="title-spacing"><%= title %></h1>
-        <ul>
-            <% blogs.forEach(blog => { %>
-                <li>
+        <ul class="list-group">
+            <% blogs.forEach((blog, index) => { %>
+                <li class ="list-group-item">
                     <h2><%= blog.blogTitle %></h2>
                     <p><%= blog.blogText %></p>
-                    <a href="/blogs/edit/<%= blog._id %>">Edit</a> 
-                    <a href="/blogs/delete/<%= blog._id %>">Delete</a>
+                    <a href="/blogs/edit/<%= index %>" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="/blogs/delete/<%= index %>" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
                 </li>
             <% }) %>
         </ul>

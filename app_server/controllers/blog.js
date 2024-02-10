@@ -17,7 +17,7 @@ module.exports.blogList = async (req, res) => {
         blogs: [
             { blogTitle: "My First Blog Entry", blogText: "This is my first blog post!", createdOn: new Date() },
             { blogTitle: "Another Cool Post", blogText: "More interesting content goes here.", createdOn: new Date() },
-            // ... add more entries if needed
+            { blogTitle: "Another Cooler Post", blogText: "More interesting content goes here.", createdOn: new Date() },
         ]
     });
 };
@@ -33,12 +33,26 @@ module.exports.blogAdd = function(req, res){
     res.render('blog-add', {title: 'Blog Add'});
 }
 
-/* GET Blog edit page. */
 module.exports.blogEdit = function(req, res) {
-    res.render('blog_edit', { title: 'Blog Edit'});
+    const { id } = req.params; // Get the id from params
+    console.log("Editing blog with id:", id);
+    res.render('blog_edit', { title: 'Edit Blog', id });
 };
 
-/* GET Blog delete page. */
 module.exports.blogDelete = function(req, res) {
-    res.render('blog_delete', { title: 'Blog Delete'});
+    const { id } = req.params; // Get the id from params
+    console.log("Deleting blog with id:", id);
+    res.render('blog_delete', { title: 'Delete Blog'});
 };
+
+
+// /* GET Blog edit page. */
+// module.exports.blogEdit = function(req, res) {
+//     //res.render('blog_edit', { title: 'Blog Edit'});
+//     res.redirect('/blogList')
+// };
+
+// /* GET Blog delete page. */
+// module.exports.blogDelete = function(req, res) {
+//     res.render('blog_delete', { title: 'Blog Delete'});
+// };

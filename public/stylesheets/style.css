@@ -1,13 +1,45 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
 
 a {
   color: #00B7FF;
 }
 
 .title-spacing {
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
+
+.navbar {
+    background-color: #E59866 !important;
+    color: #000 !important;
+    font: 18px 'Lato', sans-serif;;
+}
+
+.navbar .nav-link {
+    color: #000;
+}
+
+.navbar .navbar-brand {
+    color:#000;
+    font-size: 24px;
+}
+
+.navbar .navbar-brand:hover {
+    color:#873600
+}
+
+.navbar .nav-link:hover {
+    color: #A04000;
+}
+
+.navbar-toggler {
+    color: #000 !important;
+}
+
 

@@ -7,6 +7,10 @@
         
         <link rel='stylesheet' href="/bootstrap/css/bootstrap.min.css">
         <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font-awesome.min.css">
+
+
     </head>
     <body>
         <div class="container">
@@ -18,8 +22,12 @@
                 <li class ="list-group-item">
                     <h2><%= blog.blogTitle %></h2>
                     <p><%= blog.blogText %></p>
-                    <a href="/blogs/edit/<%= index %>" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                    <a href="/blogs/delete/<%= index %>" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                    <a href="/blogs/edit/<%= index %>" class="icon-link" title="Edit">
+                        <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
+                    </a>
+                    <a href="/blogs/delete/<%= index %>" class="icon-link" title="Delete">
+                        <i class="fas fa-trash-alt"></i> <!-- Font Awesome Delete Icon -->
+                    </a>
                 </li>
             <% }) %>
         </ul>

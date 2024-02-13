@@ -1,8 +1,8 @@
 body {
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0%;
+    padding-right: 0%;
     font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
 
@@ -18,7 +18,8 @@ a {
 .navbar {
     background-color: #E59866 !important;
     color: #000 !important;
-    font: 18px 'Lato', sans-serif;;
+    font: 20px 'Lato', sans-serif;
+    
 }
 
 .navbar .nav-link {
@@ -27,7 +28,7 @@ a {
 
 .navbar .navbar-brand {
     color:#000;
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .navbar .navbar-brand:hover {
@@ -40,6 +41,17 @@ a {
 
 .navbar-toggler {
     color: #000 !important;
+}
+
+.icon-link {
+    color: #A04000;
+    font-size: 22px;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.icon-link:hover {
+    color: #873600;
 }
 
 

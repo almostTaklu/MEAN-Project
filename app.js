@@ -23,7 +23,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+// Serve Bootstrap CSS
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+
+// Serve Bootstrap JS
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
 
 
 // catch 404 and forward to error handler

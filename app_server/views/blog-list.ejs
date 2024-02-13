@@ -5,16 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><%= title %> </title>
         
-        <link rel='stylesheet' href="/bootstrap/css/bootstrap.min.css">
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font-awesome.min.css">
 
 
     </head>
     <body>
+        <% include ./navbar %>
         <div class="container">
-            <% include ./navbar %>
 
         <h1 class="title-spacing"><%= title %></h1>
         <ul class="list-group">
@@ -33,6 +32,5 @@
         </ul>
         </div>
     </body>
-    <script src = "/bootstrap/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </html>

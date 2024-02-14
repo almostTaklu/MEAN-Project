@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= title %> </title>
+        
+        <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    </head>
+    <body>
+        <% include ./navbar %>
+        <div class="container">
+
+        <h1 class="title-spacing"><%= title %></h1>
+        <ul class="list-group">
+            <% blogs.forEach((blog, index) => { %>
+                <li class ="list-group-item">
+                    <h2><%= blog.blogTitle %></h2>
+                    <p><%= blog.blogText %></p>
+                    <a href="/blogs/edit/<%= index %>" class="icon-link" title="Edit">
+                        <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
+                    </a>
+                    <a href="/blogs/delete/<%= index %>" class="icon-link" title="Delete">
+                        <i class="fas fa-trash-alt"></i> <!-- Font Awesome Delete Icon -->
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+        </div>
+    </body>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</html>

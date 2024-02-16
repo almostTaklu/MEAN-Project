@@ -17,14 +17,14 @@
 
         <h1 class="title-spacing"><%= title %></h1>
         <ul class="list-group">
-            <% blogs.forEach((blog, index) => { %>
+            <% blogs.forEach((blog) => { %>
                 <li class ="list-group-item">
                     <h2><%= blog.blogTitle %></h2>
                     <p><%= blog.blogText %></p>
-                    <a href="/blogs/edit/<%= index %>" class="icon-link" title="Edit">
+                    <a href="/blogs/edit/<%= blog.id %>" class="icon-link" title="Edit">
                         <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
                     </a>
-                    <a href="/blogs/delete/<%= index %>" class="icon-link" title="Delete">
+                    <a href="/blogs/delete/<%= blog.id %>" class="icon-link" title="Delete">
                         <i class="fas fa-trash-alt"></i> <!-- Font Awesome Delete Icon -->
                     </a>
                 </li>

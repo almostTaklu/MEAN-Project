@@ -10,14 +10,14 @@ const Blog = require('../models/blogs')
     //     res.status(500).send('Error fetching blog entries');
     // }
 //}
-
+const { v4: uuidv4 } = require('uuid');
 module.exports.blogList = async (req, res) => {
     res.render('blog-list', { 
         title: 'Blog List', 
         blogs: [
-            { blogTitle: "My First Blog Entry", blogText: "This is my first blog post!", createdOn: new Date() },
-            { blogTitle: "Another Cool Post", blogText: "More interesting content goes here.", createdOn: new Date() },
-            { blogTitle: "Another Cooler Post", blogText: "More interesting content goes here.", createdOn: new Date() },
+            { id: uuidv4(), blogTitle: "My First Blog Entry", blogText: "This is my first blog post!", createdOn: new Date() },
+            { id: uuidv4(), blogTitle: "Another Cool Post", blogText: "More interesting content goes here.", createdOn: new Date() },
+            { id: uuidv4(), blogTitle: "Another Cooler Post", blogText: "More interesting content goes here.", createdOn: new Date() },
         ]
     });
 };

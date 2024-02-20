@@ -34,13 +34,11 @@ module.exports.blogAdd = function(req, res){
 }
 
 module.exports.blogEdit = function(req, res) {
-    const { id } = req.params; // Get the id from params
     console.log("Editing blog with id:", id);
     res.render('blog_edit', { title: 'Edit Blog', id });
 };
 
 module.exports.blogDelete = function(req, res) {
-    const { id } = req.params; // Get the id from params
     console.log("Deleting blog with id:", id);
     res.render('blog_delete', { title: 'Delete Blog'});
 };

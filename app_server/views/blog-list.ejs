@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= title %> </title>
-        
-        <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='/stylesheets/style.css'/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
-    </head>
-    <body>
-        <% include ./navbar %>
-        <div class="container">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <% include ./navbar %>
+    <div class="container mt-4">
         <h1 class="title-spacing"><%= title %></h1>
-        <ul class="list-group">
+        <div class="row">
             <% blogs.forEach((blog) => { %>
-                <li class ="list-group-item">
-                    <h2><%= blog.blogTitle %></h2>
-                    <p><%= blog.blogText %></p>
-                    <a href="/blogs/edit/<%= blog.id %>" class="icon-link" title="Edit">
-                        <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
-                    </a>
-                    <a href="/blogs/delete/<%= blog.id %>" class="icon-link" title="Delete">
-                        <i class="fas fa-trash-alt"></i> <!-- Font Awesome Delete Icon -->
-                    </a>
-                </li>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= blog.blogTitle %></h5>
+                            <p class="card-text"><%= blog.blogText %></p>
+                            <a href="/blogs/edit/<%= blog._id %>" class="icon-link" title="Edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="/api/blogs/delete/<%= blog._id %>" class="icon-link" title="Delete">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
             <% }) %>
-        </ul>
         </div>
-    </body>
+    </div>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
 </html>

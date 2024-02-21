@@ -11,10 +11,20 @@
     <body>
         <% include ./navbar %>
         <div class="container">
-
-        <h1 class="title-spacing"><%= title %></h1>
-        <p> under construction </p>
+            <h1 class="title-spacing"><%= title %></h1>
+            <form action="/api/blogs" method="post">
+                <div class="form-group">
+                    <label for="blogTitle">Title:</label>
+                    <input type="text" class="form-control" id="blogTitle" name="blogTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogText">Body:</label>
+                    <textarea class="form-control" id="blogText" name="blogText" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Post</button>
+            </form>
         </div>
+        
     </body>
     <script src = "/bootstrap/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

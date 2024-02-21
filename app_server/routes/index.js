@@ -15,7 +15,15 @@ router.get('/blogAdd', blog.blogAdd);
 
 // Add Edit and Delete Routes 
 router.get('/blogs/edit/:id', blog.blogEdit);  
-router.get('/blogs/delete/:id', blog.blogDelete); 
+router.get('/blogs/delete/:id', blog.blogDelete);
+
+// Add Update Route
+router.post('/blogUpdate/:id', blog.blogUpdate);
+
+// Add Create Route
+router.delete('/blogDelete/:id', blog.blogDeleteOne);
+
+
 
 
 module.exports = router;

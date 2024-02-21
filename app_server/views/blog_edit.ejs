@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Blog Edit</title>
-        
-        <link rel='stylesheet' href="/bootstrap/css/bootstrap.min.css">
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    </head>
-    <body>
-        <% include ./navbar %>
-        <div class="container">
-        <h1 class="title-spacing">Edit Blog</h1>
-        <p>Blog editing under construction</p>
-        </div>
-    </body>
-    <script src = "/bootstrap/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog - <%= blog.title %></title>
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+</head>
+<body>
+    <% include ./navbar %>
+    <div class="container mt-4">
+        <h1 class="mb-4">Edit Blog</h1>
+        <form action="/blogUpdate/<%= blog._id %>" method="post"> <!-- Or the route to handle the post operation -->
+            <input type="hidden" name="_method" value="PUT"> <!-- For method-override to handle PUT request -->
+            <div class="form-group">
+                <label for="blogTitle">Blog Title</label>
+                <input type="text" class="form-control" id="blogTitle" name="blogTitle" value="<%= blog.blogTitle %>">
+            </div>
+            <div class="form-group">
+                <label for="blogText">Content</label>
+                <textarea class="form-control" id="blogText" name="blogText" rows="5"><%= blog.blogText %></app-textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Blog</button>
+        </form>
+    </div>
+</body>
 </html>

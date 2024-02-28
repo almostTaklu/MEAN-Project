@@ -1,85 +1,50 @@
+var express = require('express');
 var request = require('request');
-var errorHandlers = require('../../public/javascript/error.js');
 const { render } = require('../../app');
+const Blog = require('../../app_api/models/blogs');
+
 var apiOptions = {
     server : "http://localhost"
 };
+ 
 
-
-/* GET home page. */
-module.exports.index = function(req, res) {
-    var requestOptions, path;
-    path = '/api/blogs';
-    requestOptions = {
-        url: apiOptions.server + path,
-        method: "GET",
-        json: {},
-    };
-    request(requestOptions, 
-        function(err, response, body) {
-            if (err) {
-                console.error(err);
-                res.status(500).send("Error fetching blogs");
-                return;
-            }
-            renderHomepage(req, res, body);
-        }
-    );
-};
-
-// Render the home page
-var renderHomepage = function(req, res, responseBody) {
-    res.render('index', { 
-        title: 'Ganga Acharya Blog Site', 
-        blogs: responseBody
-    });
-};
-
-//GET blog list
+// Get the blog list
 module.exports.blogList = function (req, res) {
     var requestOptions, path;
     path = '/api/blogs';
     requestOptions = {
         url: apiOptions.server + path,
         method: "GET",
-        json: {},
+        json: {}
     };
-    request(requestOptions, 
+    request(
+        requestOptions,
         function (err, response, body) {
             if (err) {
                 // Handle error
                 console.error(err);
                 res.status(500).send("Error fetching blogs");
-                return;
             }
-            // Use this function to render the blog list page with the fetched blogs
-            renderListpage(req, res, body);
+            res.render('blog-list', {
+                title: 'Blog List',
+                blogs: body,
+            });
         }
     );
 };
 
-// Render blog list page
-var renderListpage = function (req, res, responseBody) {
-    // Assuming responseBody is an array of blogs
-    res.render('blog-list', { 
-        title: 'Blog List', 
-        blogs: responseBody  // Pass blogs from the API response
-    });
+// Get add blog page
+module.exports.blogAdd = function (req, res) {
+    res.render('blog-add', { title: 'Add Blog' });
 };
 
-/* POST blog */
-module.exports.blogAdd = function(req, res){
-    res.render('blog-add', {title: 'Blog Add'});
-}
-
-module.exports.blogCreate = function(req, res) {
+// Do Add a blog
+module.exports.doAddBlog = function (req, res) {
     var requestOptions, path, postdata;
     path = '/api/blogs';
-
     postdata = {
         blogTitle: req.body.blogTitle,
-        blogText: req.body.blogText,
-        //createdOn: req.body.createdOn
+        blogText: req.body.blogText
     };
     requestOptions = {
         url: apiOptions.server + path,
@@ -87,41 +52,47 @@ module.exports.blogCreate = function(req, res) {
         json: postdata
     };
     request(
-        requestOptions, 
-        function(err, response, body) {
-        if (response.statusCode === 201) {
-            res.redirect('/blogList');
-        } else {
-            _showError(req, res, response.statusCode);
+        requestOptions,
+        function (err, response, body) {
+            if (response.statusCode === 201) {
+                res.redirect('/blogList');
+            } else {
+                _showError(req, res, response.statusCode);
+            }
         }
+    );
+};
+
+// Render the edit blog page
+var renderEditBlog = function (req, res, blogData) {
+    res.render('blog-edit', {
+        title: 'Edit Blog',
+        blog: blogData
     });
 };
 
-exports.blogEdit = function(req, res) {
+// Get the edit blog
+module.exports.editBlog = function (req, res) {
     var requestOptions, path;
-    path = `/api/blogs/${req.params.id}`;
+    path = '/api/blogs/' + req.params.blogid;
     requestOptions = {
         url: apiOptions.server + path,
         method: "GET",
         json: {}
     };
-    request(requestOptions, function(err, response, body) {
-        // Handle any possible issues with the network request
-        if (err) {
-            return res.status(500).json({ message: "Error fetching blog data." });
+    request(
+        requestOptions,
+        function (err, response, body) {
+            renderEditBlog(req, res, body);
         }
-        // With a blog object in the body, render the page to edit it
-        res.render('blog_edit', { 
-            title: 'Edit Blog', 
-            blog: body
-        });
-    });
+    );
 };
 
-//Blog Edit post
-module.exports.blogUpdate = function(req, onSucceeded, onFailed) {
+// Do Edit a blog
+module.exports.doEditBlog = function (req, res) {
+    var id = req.params.blogid;
     var requestOptions, path, postdata;
-    path = '/api/blogs/' + req.params.id;
+    path = '/api/blogs/' + id;
     postdata = {
         blogTitle: req.body.blogTitle,
         blogText: req.body.blogText
@@ -131,54 +102,77 @@ module.exports.blogUpdate = function(req, onSucceeded, onFailed) {
         method: "PUT",
         json: postdata
     };
-    request(requestOptions, function(err, response, body) {
-        if (!err && response.statusCode === 200) {
-            onSucceeded();
-        } else {
-            onFailed(err, response, body);
+    request(
+        requestOptions,
+        function (err, response, body) {
+            if (response.statusCode === 200) {
+                console.log(body);
+                res.redirect('/blogList');
+            } else {
+                _showError(req, res, response.statusCode);
+            }
         }
-    });
+    );
 };
 
+//render delete blog page
+var renderDeleteBlog = function (req, res, responseBody) {
+    res.render('blog-delete', { 
+            title: 'Blog Delete', 
+            blog: responseBody 
+        });
+};
 
-//Blog Delete
-module.exports.blogDelete = function(req, res) {
-    var requestOptions, path;
-    path = '/api/blogs/' + req.params.id;
+// Get the delete blog
+module.exports.deleteBlog = function (req, res) {
+    path = "/api/blogs/" + req.params.blogid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(requestOptions, function(err, response, body) {
+		renderDeleteBlog(req, res, body);
+	});
+};
+
+// Do Delete a blog
+module.exports.doDeleteBlog = function (req, res) {
+    var requestOptions, path, postdata;
+    var id = req.params.blogid;
+    path = '/api/blogs/' + id;
     requestOptions = {
         url: apiOptions.server + path,
         method: "DELETE",
         json: {}
     };
-    request(requestOptions, 
-        function(err, response, body) {
-            renderDeletepage(req, res, body);
+    request(
+        requestOptions,
+        function (err, response, body) {
+            if (response.statusCode === 204) {
+                res.redirect('/blogList');
+            } else {
+                _showError(req, res, response.statusCode);
+            }
         }
     );
 };
 
-// Render blog delete page
-var renderDeletepage = function(req, res, responseBody) {
-    res.render('blog_delete', { 
-        blogs: responseBody
-    });
-};
-
-//Blog Delete post
-module.exports.blogDeleteOne = function(req, res) {
-    var requestOptions, path;
-    path = `/api/blogs/${req.params.id}`;
-    requestOptions = {
-        url: `${apiOptions.server}${path}`,
-        method: "DELETE",
-        json: {}
-    };
-    request(requestOptions, function(err, response, body) {
-        if (response.statusCode === 204) {
-            res.redirect('/blogList');
-        } else {
-            // Handle error, maybe render a page to show the error
-            res.status(response.statusCode).send("Error deleting the blog post.");
-        }
-    });
+var _showError = function (req, res, status) {
+    var title, content;
+    if (status === 404) {
+    title = "404, page not found";
+    content = "Oh dear. Looks like we can't find this page. Sorry.";
+} else if (status === 500) {
+    title = "500, internal server error";
+    content = "How embarrassing. There's a problem with our server.";
+} else {
+    title = status + ", something's gone wrong";
+    content = "Something, somewhere, has gone just a little bit wrong.";
+}
+    res.status(status);
+    res.render('generic-text', {
+    title : title,
+    content : content
+});
 };

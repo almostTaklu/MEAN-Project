@@ -31,10 +31,10 @@ app.use('/api', routesApi);
 app.use(methodOverride('_method'));
 
 // Serve Bootstrap CSS
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+//app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
 
 // Serve Bootstrap JS
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+//app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

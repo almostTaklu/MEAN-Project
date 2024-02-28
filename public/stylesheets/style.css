@@ -15,6 +15,12 @@ a {
     margin-bottom: 30px;
 }
 
+.title-spacing-add {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 .navbar {
     background-color: #E59866 !important;
     color: #000 !important;
@@ -54,4 +60,151 @@ a {
     color: #873600;
 }
 
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    border-radius: 5px; /* Adds rounded corners to the card */
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.card .card-body .card-title {
+    font-size: 24px; /* Larger font size for the title */
+    font-weight: bold; /* Makes the title bold */
+    color: #333; /* Dark color for better visibility */
+}
+
+.card .card-body .card-text {
+    font-size: 16px;
+    color: #555; /* Slightly lighter than the title for contrast */
+    margin-top: 10px; /* Adds some space between the title and text */
+}
+
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #007bff; /* Bootstrap primary color */
+}
+
+.icon-link:hover {
+    color: #0056b3; /* Darker shade for hover effect */
+}
+
+.text-muted {
+    font-size: 14px; /* Smaller font size for the date */
+}
+
+.card-header {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #ffffff; /* White color for the title text */
+    padding: 10px 15px; /* Adjust padding as needed */
+    border-top-left-radius: 5px; /* Rounded corners on the top */
+    border-top-right-radius: 5px;
+}
+
+.card-title {
+    margin-bottom: 0; /* Remove margin to fit nicely in the header */
+}
+
+.card-footer {
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 10px 15px; /* Adjust padding as needed */
+    display: flex; /* Use flexbox for the footer */
+    justify-content: space-between; /* Space between date and icons */
+    align-items: center; /* Align items vertically */
+    border-bottom-left-radius: 5px; /* Rounded corners on the bottom */
+    border-bottom-right-radius: 5px;
+}
+
+.posted-date {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+    color: #6c757d; /* Bootstrap's secondary text color for contrast */
+}
+
+
+.card-footer .icon-link {
+    margin-left: 10px; /* Space between icons */
+    color: #007bff; /* Keep the icon color consistent with the header */
+}
+
+.card-footer .icon-link:hover {
+    color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Specific Styles for Edit Page */
+.edit-blog-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+.edit-blog-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.edit-form .form-group {
+    margin-bottom: 25px;
+}
+.edit-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+.edit-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+/* Common Styles for Edit and Delete Pages */
+.form-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.form-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-body .form-group {
+    margin-bottom: 25px;
+}
+
+.form-body label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-actions button[type="submit"], .form-actions a {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+/* Specific Styles for Delete Page */
+.delete-warning {
+    color: #dc3545; /* Bootstrap danger color */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Adjusting the readonly inputs and textareas to appear less editable */
+.form-container input[readonly], .form-container textarea[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
 

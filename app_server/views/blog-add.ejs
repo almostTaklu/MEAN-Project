@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= title %></title>
-        
-        <link rel='stylesheet' href="/bootstrap/css/bootstrap.min.css">
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-    </head>
-    <body>
-        <% include ./navbar %>
-        <div class="container">
-            <h1 class="title-spacing"><%= title %></h1>
-            <form action="/api/blogs" method="post">
-                <div class="form-group">
-                    <label for="blogTitle">Title:</label>
-                    <input type="text" class="form-control" id="blogTitle" name="blogTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="blogText">Body:</label>
-                    <textarea class="form-control" id="blogText" name="blogText" rows="3" required></textarea>
-                </div>
+<head>
+    <% include ./partials/head %>
+</head>
+<body>
+    <% include ./partials/navbar %>
+    <div class="container edit-blog-container">
+        <h1 class="title-spacing-add"><%= title %></h1>
+        <form action="/blogAdd/" method="post" class="edit-form">
+            <div class="form-group">
+                <label for="blogTitle">Title:</label>
+                <input type="text" class="form-control" id="blogTitle" name="blogTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="blogText">Body:</label>
+                <textarea class="form-control" id="blogText" name="blogText" rows="5" required></textarea>
+            </div>
+            <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Add Post</button>
-            </form>
-        </div>
-        
-    </body>
-    <script src = "/bootstrap/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+            </div>
+        </form>
+    </div>
+    <% include ./partials/scripts %>
+</body>
 </html>

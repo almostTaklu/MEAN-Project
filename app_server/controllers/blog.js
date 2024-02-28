@@ -6,7 +6,6 @@ const Blog = require('../../app_api/models/blogs');
 var apiOptions = {
     server : "http://localhost"
 };
- 
 
 // Get the blog list
 module.exports.blogList = function (req, res) {
@@ -158,21 +157,18 @@ module.exports.doDeleteBlog = function (req, res) {
     );
 };
 
-var _showError = function (req, res, status) {
-    var title, content;
+// Helper function for handling errors
+const showError = (req, res, status) => {
+    let title, content;
     if (status === 404) {
-    title = "404, page not found";
-    content = "Oh dear. Looks like we can't find this page. Sorry.";
-} else if (status === 500) {
-    title = "500, internal server error";
-    content = "How embarrassing. There's a problem with our server.";
-} else {
-    title = status + ", something's gone wrong";
-    content = "Something, somewhere, has gone just a little bit wrong.";
-}
-    res.status(status);
-    res.render('generic-text', {
-    title : title,
-    content : content
-});
-};
+        title = "404, page not found";
+        content = "Oh dear. Looks like we can't find this page. Sorry.";
+    } else if (status === 500) {
+        title = "500, internal server error";
+        content = "How embarrassing. There's a problem with our server.";
+    } else {
+        title = `${status}, something's gone wrong`;
+        content = "Something, somewhere, has gone just a little bit wrong.";
+    }
+    res.status(status).render('generic-text', { title, content });
+    };

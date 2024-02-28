@@ -22,42 +22,42 @@ a {
 }
 
 .navbar {
-    background-color: #E59866 !important;
-    color: #000 !important;
+    background-color: #007bff !important;
+    color: #fff !important;
     font: 20px 'Lato', sans-serif;
     
 }
 
 .navbar .nav-link {
-    color: #000;
+    color: #fff;
 }
 
 .navbar .navbar-brand {
-    color:#000;
+    color:#fff;
     font-size: 26px;
 }
 
 .navbar .navbar-brand:hover {
-    color:#873600
+    color:#000
 }
 
 .navbar .nav-link:hover {
-    color: #A04000;
+    color: #000;
 }
 
 .navbar-toggler {
-    color: #000 !important;
+    color: #fff !important;
 }
 
 .icon-link {
-    color: #A04000;
+    color: #007bff;
     font-size: 22px;
     text-decoration: none;
     margin-right: 30px;
 }
 
 .icon-link:hover {
-    color: #873600;
+    color: #007bff;
 }
 
 .card {

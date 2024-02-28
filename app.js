@@ -19,6 +19,9 @@ var app = express();
 app.set('views', path.join(__dirname, './app_server/views'));
 app.set('view engine', 'ejs');
 
+// Serve static files before Morgan so these requests aren't logged
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

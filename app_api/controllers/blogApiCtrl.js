@@ -7,42 +7,43 @@ var sendJSONresponse = function (res, status, content) {
     res.json(content);
 };
 
-// Create a new blog
-module.exports.blogCreate = function (req, res) {
+// Create a blog
+module.exports.blogCreate = async function (req, res) {
     console.log("Creating a blog");
-    Blog.create({
-        blogTitle: req.body.blogTitle,
-        blogText: req.body.blogText
-    })
-    .then(function (newBlog) {
+
+    try {
+        const newBlog = await Blog.create({
+            blogTitle: req.body.blogTitle,
+            blogText: req.body.blogText
+        });
         sendJSONresponse(res, 201, newBlog);
-    })
-    .catch(function (err) {
-        sendJSONresponse(res, 400, err);
-    });
-};
-
-// Read One blog
-module.exports.blogReadOne = function (req, res) {
-    var blogId = req.params.blogid;
-    console.log("API finding blog: "+blogId)
-    Blog.findOne({_id:blogId})
-    .then(function(blog) {
-        console.log("API: "+blog)
-        if (blog) {
-            sendJSONresponse (res, 200, blog);
-        } else {
-            sendJSONresponse (res, 404, blog);
-        }
-    })
-    .catch(function(err) {
+    } catch (err) {
         console.log(err);
-        sendJSONresponse (res, 400, err);
-
-    })
+        sendJSONresponse(res, 400, err);
+    }
 };
 
-//
+// Read a blog
+module.exports.blogReadOne = async function (req, res) {
+    const blogId = req.params.blogid;
+    console.log("Reading blog:", blogId);
+
+    try {
+        const blog = await Blog.findOne({_id: blogId});
+        console.log("API:", blog);
+
+        if (blog) {
+            sendJSONresponse(res, 200, blog);
+        } else {
+            sendJSONresponse(res, 404, { "message": "Blog not found" });
+        }
+    } catch (err) {
+        console.log(err);
+        sendJSONresponse(res, 400, err);
+    }
+};
+
+// Update a blog
 module.exports.blogUpdateOne = async function (req, res) {
     const blogId = req.params.blogid;
     console.log('Updating blog with ID:', blogId);
@@ -67,9 +68,7 @@ module.exports.blogUpdateOne = async function (req, res) {
     }
 };
 
-
-
-//Delete one blog
+// DELETE /api/
 module.exports.blogDeleteOne = async function (req, res) {
     const blogId = req.params.blogid;
     console.log("Deleting blog with id " + blogId);
@@ -88,34 +87,35 @@ module.exports.blogDeleteOne = async function (req, res) {
     }
 };
 
+// Render blog list
+const renderBlogList = function(req, res, responseBody) {
+    // Use map to transform each blog into the desired format
+    const blogs = responseBody.map(blog => ({
+        blogTitle: blog.blogTitle,
+        blogText: blog.blogText,
+        _id: blog._id
+    }));
 
-// Render the list of blogs
-var renderBlogList = function (req, res, responseBody) {
-    var blogs = [];
-    responseBody.forEach(function (blog) {
-        blogs.push({
-            blogTitle: blog.blogTitle,
-            blogText: blog.blogText,
-            _id: blog._id
-        });
-    });
     return blogs;
-}
+};
 
-// List of blogs
-module.exports.blogList = function (req, res) {
+// GET /api/blogs
+module.exports.blogList = async function (req, res) {
     console.log("Getting blogList");
-    Blog.find().exec()
-        .then(blogs => {
-            if (!blogs) {
-                sendJSONresponse(res, 404, {"message": "blogs not found"});
-                return;
-            }
-            console.log(blogs);
-            sendJSONresponse(res, 404, blogs);
-            return;
-        })
-        .catch(err => {
-            sendJSONresponse(res, 200, renderBlogList(req, res, err));
-        });
+
+    try {
+        const blogs = await Blog.find().exec();
+
+        if (!blogs || blogs.length === 0) {
+            // If no blogs are found, send a 404 response with a message.
+            return res.status(404).json({ "message": "blogs not found" });
+        }
+
+        // When blogs are found, send a 200 response with the blogs data.
+        res.status(200).json(blogs);
+    } catch (err) {
+        console.error(err);
+        // If there's an error in the process, respond with a 500 status code and the error.
+        res.status(500).json({ "message": "Error listing blogs", error: err });
+    }
 };

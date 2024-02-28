@@ -13,9 +13,12 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "method-override": "^3.0.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "request": "^2.88.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"

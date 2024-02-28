@@ -2,20 +2,29 @@ var express = require('express');
 var router = express.Router();
 
 /* blog controller */
-var blog = require('../controllers/blog')
+var blogCtrl = require('../controllers/blog')
+var ctrlHome = require('../controllers/home')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Ganga Acharya Blog Site' });
-});
+router.get('/', ctrlHome.index);
 
-/* GET/POST blog page. */
-router.get('/blogList', blog.blogList);
-router.get('/blogAdd', blog.blogAdd);
+/* GET blogList page. */
+router.get('/blogList', blogCtrl.blogList);
 
-// Add Edit and Delete Routes 
-router.get('/blogs/edit/:id', blog.blogEdit);  
-router.get('/blogs/delete/:id', blog.blogDelete); 
+/* GET blogCreate page. */
+router.get('/blogAdd', blogCtrl.blogAdd);
+/* POST blogCreate page. */
+router.post('/blogAdd', blogCtrl.doAddBlog);
+
+/* GET blogReadOne page. */
+router.get('/blogEdit/:blogid', blogCtrl.editBlog);
+/* GET blogUpdateOne page. */
+router.post('/blogEdit/:blogid', blogCtrl.doEditBlog);
+
+/* GET blogDeleteOne page. */
+router.get('/blogDelete/:blogid', blogCtrl.deleteBlog);
+/* POST blogDeleteOne page. */
+router.post('/blogDelete/:blogid', blogCtrl.doDeleteBlog);
 
 
 module.exports = router;

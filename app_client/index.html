@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html ng-app="bloggerApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Ganga Acharya Blog Site</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <script src = "lib/angular.min.js"></script>
+        <script src = "lib/angular-route.min.js"></script>
+        
+        <script src = "bloggerApp.js"></script>
+    </head>
+    <body>
+        <div ng-include ="'partials/head.html'"></div>
+        <nav ng-include ="'partials/navbar.html'"></nav>
+
+        <!-- Main content view -->
+        <div ng-view></div>
+
+        <script type="text/ng-template" id="/home.html">
+            <div class="container mt-4">
+                <h2> {{ vm.title }} </h2>
+                <h4> {{ vm.message }} </h4>
+            </div>
+
+        <!-- blogList.html -->
+        <script type="text/ng-template" id="/blogList.html">
+            <div class="container mt-4" ng-controller="ListController as vm">
+                <h1 class="title-spacing">{{ vm.title }}</h1>
+                <div class="row">
+                    <div ng-repeat="blog in vm.blogs" class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ blog.blogTitle }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ blog.blogText }}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
+                                <div>
+                                    <a ng-href="#!/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a ng-href="#!/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="!vm.blogs.length" class="col-12">
+                        <p>There are no posts yet. <a ng-href="#!/blogAdd">Click here</a> to add a new post.</p>
+                    </div>
+                </div>
+            </div>
+        </script>
+        
+        <!-- blogAdd.html -->
+        <script type="text/ng-template" id="/blogAdd.html">
+            <div class="container edit-blog-container" ng-controller="AddController as vm">
+                <h1 class="title-spacing-add">Add Blog Post</h1>
+                <form ng-submit="vm.addBlog()" class="edit-form">
+                    <div class="form-group">
+                        <label for="blogTitle">Title:</label>
+                        <input type="text" class="form-control" id="blogTitle" ng-model="vm.blog.blogTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogText">Body:</label>
+                        <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Post</button>
+                    </div>
+                </form>
+            </div>
+        </script>
+        
+        <!-- blogEdit.html -->
+        <script type="text/ng-template" id="/blogEdit.html">
+            <div class="container mt-5" ng-controller="EditController as vm">
+                <div class="edit-blog-container">
+                    <h1 class="edit-blog-header">Edit Blog</h1>
+                    <form ng-submit="vm.updateBlog()" class="edit-form">
+                        <div class="form-group">
+                            <label for="blogTitle">Blog Title</label>
+                            <input class="form-control" id="title" ng-model="vm.blog.blogTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="blogText">Content</label>
+                            <textarea class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Blog</button>
+                    </form>
+                </div>
+            </div>
+        </script>
+
+        <!-- blogDelete.html -->
+        <script type="text/ng-template" id="/blogDelete.html">
+            <div class="container mt-5" ng-controller="DeleteController as vm">
+                <div class="form-container">
+                    <h1 class="form-header">Delete Blog</h1>
+                    <div class="delete-warning">
+                        <p>Are you sure you want to delete this blog? This action cannot be undone.</p>
+                    </div>
+                    <form ng-submit="vm.deleteBlog()" class="form-body">
+                        <div class="form-group">
+                            <label for="blogTitle">Blog Title</label>
+                            <input readonly class="form-control" id="title" ng-model="vm.blog.blogTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="blogText">Content</label>
+                            <textarea readonly class="form-control" id="entry" rows="3" ng-model="vm.blog.blogText"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a ng-href="#!/blogList" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </script>
+        
+
+        <script ng-include="'partials/script.html'"></script>
+    </body>
+
+</html>

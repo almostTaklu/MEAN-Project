@@ -6,18 +6,10 @@ var logger = require('morgan');
 require('./app_api/models/db');
 var methodOverride = require('method-override');
 
-
-var indexRouter = require('./app_server/routes/index');
-//var usersRouter = require('./app_server/routes/users');
-
 // API routes
 var routesApi = require('./app_api/routes/index');
 
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, './app_server/views'));
-app.set('view engine', 'ejs');
 
 // Serve static files before Morgan so these requests aren't logged
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,23 +18,21 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 
-app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+app.use('/js', express.static(__dirname + '/node_modules/angular'));
+app.use('/js', express.static(__dirname + '/node_modules/angular-route'));
+app.use('/js', express.static(__dirname + '/node_modules/angular-ui-router/release'));
+app.use('/js', express.static(__dirname + '/app_client'));
+
 app.use('/api', routesApi);
 app.use(methodOverride('_method'));
-// AngularJS
+
 app.use(function(req, res) {
     res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
-})
-
-// Serve Bootstrap CSS
-//app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
-
-// Serve Bootstrap JS
-//app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,12 +49,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-// // make blogger to run on port 80
-// const port = 80;
-// app.listen(port, () => {
-//     console.log(`Blogger app running on port ${port}`);
-// });
-
 
 module.exports = app;

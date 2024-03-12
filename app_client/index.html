@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Ganga Acharya Blog Site</title>
+        <base href="/">
+
         <link rel="stylesheet" href="stylesheets/style.css">
         <script src = "lib/angular.min.js"></script>
         <script src = "lib/angular-route.min.js"></script>
@@ -38,10 +40,10 @@
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
                                 <div>
-                                    <a ng-href="#!/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
+                                    <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a ng-href="#!/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
+                                    <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -49,7 +51,7 @@
                         </div>
                     </div>
                     <div ng-if="!vm.blogs.length" class="col-12">
-                        <p>There are no posts yet. <a ng-href="#!/blogAdd">Click here</a> to add a new post.</p>
+                        <p>There are no posts yet. <a ng-href="/blogAdd">Click here</a> to add a new post.</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +116,7 @@
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-danger">Delete</button>
-                            <a ng-href="#!/blogList" class="btn btn-secondary">Cancel</a>
+                            <a ng-href="/blogList" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

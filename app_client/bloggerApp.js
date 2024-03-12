@@ -1,7 +1,7 @@
 var app = angular.module('bloggerApp', ['ngRoute']);
 
 //Router provider
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/home.html',
@@ -29,6 +29,11 @@ app.config(function($routeProvider) {
             controllerAs: 'vm'
         })
         .otherwise({redirectTo: '/'});
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 });
 
 //Service for API calls

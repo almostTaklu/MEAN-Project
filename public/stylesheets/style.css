@@ -1,31 +1,37 @@
 body {
+    /* background: linear-gradient(135deg, #003366 0%, #0077B6 80%); */
+    /* color: #ffffff; /* Ensures text contrasts well against the dark background */
+    /* background-attachment: fixed; /* Keeps the background fixed during scrolling */
+    /* background-size: cover; /* Covers the entire screen */
     padding-top: 0px;
     padding-bottom: 10px;
     padding-left: 0;
     padding-right: 0;
-    font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 16px 'Roboto', sans-serif;
   }
 
-a {
-  color: #00B7FF;
+a, .btn-primary {
+  color: #fff;
 }
 
-.title-spacing {
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-.title-spacing-add {
+.title-spacing, .title-spacing-add {
     margin-top: 50px;
     margin-bottom: 30px;
     text-align: center;
 }
 
 .navbar {
-    background-color: #007bff !important;
-    color: #fff !important;
-    font: 20px 'Lato', sans-serif;
-    
+    background-color: #003366 !important;
+    padding: 1rem 2rem;
+    font-size: 18px; /* Increased size */
+    font-family: 'Arial', sans-serif; /* Change as per preference */
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff;
+    font-size: 22px; /* Increase the font size for the brand and links */
+    font-weight: bold; /* Medium font weight for a little emphasis */
+    transition: color 0.2s; /* Smooth transition for hover effects */
 }
 
 .navbar .nav-link {
@@ -37,37 +43,40 @@ a {
     font-size: 26px;
 }
 
-.navbar .navbar-brand:hover {
-    color:#000
-}
-
-.navbar .nav-link:hover {
-    color: #000;
+.navbar .navbar-brand:hover, .navbar .nav-link:hover {
+    color: #0077B6; /* Light blue for hover states */
 }
 
 .navbar-toggler {
-    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>"); /* Custom icon color */
 }
 
 .icon-link {
-    color: #007bff;
+    color: #00B7C3;
     font-size: 22px;
     text-decoration: none;
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 .icon-link:hover {
-    color: #007bff;
+    color: #0077B6;
 }
 
 .card {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: 0.3s;
-    border-radius: 5px; /* Adds rounded corners to the card */
+    color: #333;
+    border-radius: 10px; /* Adds rounded corners to the card */
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .card .card-body .card-title {
@@ -82,28 +91,16 @@ a {
     margin-top: 10px; /* Adds some space between the title and text */
 }
 
-.icon-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    color: #007bff; /* Bootstrap primary color */
-}
-
-.icon-link:hover {
-    color: #0056b3; /* Darker shade for hover effect */
-}
-
 .text-muted {
     font-size: 14px; /* Smaller font size for the date */
 }
 
 .card-header {
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color: #003366;
     color: #ffffff; /* White color for the title text */
     padding: 10px 15px; /* Adjust padding as needed */
-    border-top-left-radius: 5px; /* Rounded corners on the top */
-    border-top-right-radius: 5px;
+    border-top-left-radius: 10px; /* Rounded corners on the top */
+    border-top-right-radius: 10px;
 }
 
 .card-title {
@@ -112,12 +109,13 @@ a {
 
 .card-footer {
     background-color: #f8f9fa; /* Light grey background */
+    color: #0077B6;
     padding: 10px 15px; /* Adjust padding as needed */
     display: flex; /* Use flexbox for the footer */
     justify-content: space-between; /* Space between date and icons */
     align-items: center; /* Align items vertically */
-    border-bottom-left-radius: 5px; /* Rounded corners on the bottom */
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 10px; /* Rounded corners on the bottom */
+    border-bottom-right-radius: 10px;
 }
 
 .posted-date {
@@ -125,25 +123,27 @@ a {
     color: #6c757d; /* Bootstrap's secondary text color for contrast */
 }
 
-
 .card-footer .icon-link {
-    margin-left: 10px; /* Space between icons */
-    color: #007bff; /* Keep the icon color consistent with the header */
+    margin-left: 5px; /* Space between icons */
+    color: #003366; /* Keep the icon color consistent with the header */
 }
 
 .card-footer .icon-link:hover {
-    color: #0056b3; /* Darker shade for hover effect */
+    color: #0077B6; /* Light blue for hover states */
 }
 
 /* Specific Styles for Edit Page */
 .edit-blog-container {
     max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    background-color: #fff;
+    margin: 40px auto; /* Increase top and bottom margin */
+    padding: 40px; /* Increase padding for more space inside */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* More pronounced shadow */
+    border-radius: 8px; /* Ensure there's a border-radius */
+    color: #333;
+    background-color: #fff; /* Background color */
+    border: 1px solid #ddd; /* Optional: adds a subtle border for depth */
 }
+
 .edit-blog-header {
     margin-bottom: 30px;
     text-align: center;
@@ -169,6 +169,7 @@ a {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
+    color: #333;
     background-color: #fff;
 }
 
@@ -208,3 +209,49 @@ a {
     opacity: 1;
 }
 
+.jumbotron {
+    padding: 60px 30px; /* Increases padding */
+    margin-top: 30px; /* Adds some space at the top */
+    background-color: rgba(255, 255, 255, 0.9); /* Light background with a bit of transparency */
+    border-radius: 15px; /* Softens the corners */
+    color: #333; /* Dark text for readability */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+.jumbotron h1, .jumbotron p {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight text shadow for better legibility */
+}
+
+.jumbotron .btn {
+    background-color: #00b7c3; /* Custom button color */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px; /* Larger button padding */
+    font-size: 18px; /* Larger font size */
+    border-radius: 8px; /* Rounded button edges */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Button shadow for depth */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for hover effects */
+}
+
+.jumbotron .btn:hover, .jumbotron .btn:focus {
+    background-color: #00B7C3; /* Lighter color on hover/focus */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Slightly larger shadow on hover/focus for a "lifting" effect */
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+}
+
+.jumbotron .btn-primary:hover {
+    background-color: #0077B6; /* Custom button color */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 16px;
+    bottom: 0;
+    width: 100%;
+}

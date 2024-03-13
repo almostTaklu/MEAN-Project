@@ -65,7 +65,7 @@ app.service('BlogService', ['$http', function($http) {
 app.controller('HomeController', [function() {
     var vm = this;
     vm.title = 'Ganga Acharya Blogsite';
-    vm.message = 'Welcome to Ganga Acharya Blogsite';
+    vm.message = 'Blogsite for Web Development class';
 }]);
 
 //Controller for listing blogs

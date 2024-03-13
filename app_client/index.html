@@ -19,48 +19,57 @@
         <div ng-view></div>
 
         <script type="text/ng-template" id="/home.html">
-            <div class="container mt-4">
-                <h2> {{ vm.title }} </h2>
-                <h4> {{ vm.message }} </h4>
-            </div>
-
-        <!-- blogList.html -->
-        <script type="text/ng-template" id="/blogList.html">
-            <div class="container mt-4" ng-controller="ListController as vm">
-                <h1 class="title-spacing">{{ vm.title }}</h1>
-                <div class="row">
-                    <div ng-repeat="blog in vm.blogs" class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ blog.blogTitle }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ blog.blogText }}</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
-                                <div>
-                                    <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-if="!vm.blogs.length" class="col-12">
-                        <p>There are no posts yet. <a ng-href="/blogAdd">Click here</a> to add a new post.</p>
-                    </div>
+            <div class="container mt-5">
+                <div class="jumbotron">
+                    <h1 class="display-4">{{ vm.title }}</h1>
+                    <p class="lead">{{ vm.message }}</p>
+                    <hr class="my-4">
+                    <p>Click below to view/edit/delete blog posts</p>
+                    <a class="btn btn-primary btn-lg" href="/blogList" role="button">View Blogs</a>
                 </div>
             </div>
         </script>
         
+
+        <!-- blogList.html -->
+        <script type="text/ng-template" id="/blogList.html">
+    <div class="container"> 
+        <h1 class="title-spacing">{{ vm.title }}</h1>
+
+        <div class="row">
+            <div ng-repeat="blog in vm.blogs" class="col-md-4"> 
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ blog.blogTitle }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ blog.blogText }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
+                        <div>
+                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="!vm.blogs.length" class="col-12">
+                <p>There are no posts yet. <a ng-href="/blogAdd">Click here</a> to add a new post.</p>
+            </div>
+        </div>
+    </div>
+</script>
+
+        
         <!-- blogAdd.html -->
         <script type="text/ng-template" id="/blogAdd.html">
             <div class="container edit-blog-container" ng-controller="AddController as vm">
-                <h1 class="title-spacing-add">Add Blog Post</h1>
+                <h1 class="edit-blog-header">Add Blog Post</h1>
                 <form ng-submit="vm.addBlog()" class="edit-form">
                     <div class="form-group">
                         <label for="blogTitle">Title:</label>
@@ -124,7 +133,8 @@
         </script>
         
 
-        <script ng-include="'partials/script.html'"></script>
+        <script src = "/bootstrap/js/jquery.min.js"></script>
+        <script src = "/bootstrap/js/bootstrap.min.js"></script>
     </body>
 
 </html>

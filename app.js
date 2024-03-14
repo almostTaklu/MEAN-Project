@@ -1,13 +1,14 @@
+require('dotenv').config(); // Load environment variables from .env
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
 require('./app_api/models/db');
+require('./app_api/config/passport'); // Import passport configuration after model is defined
 var methodOverride = require('method-override');
-
-// API routes
-var routesApi = require('./app_api/routes/index');
+var routesApi = require('./app_api/routes/index');  // Import routes for the API
 
 var app = express();
 
@@ -21,14 +22,14 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
+app.use(passport.initialize());
+app.use('/api', routesApi);
+app.use(methodOverride('_method'));
 
 app.use('/js', express.static(__dirname + '/node_modules/angular'));
 app.use('/js', express.static(__dirname + '/node_modules/angular-route'));
 app.use('/js', express.static(__dirname + '/node_modules/angular-ui-router/release'));
 app.use('/js', express.static(__dirname + '/app_client'));
-
-app.use('/api', routesApi);
-app.use(methodOverride('_method'));
 
 app.use(function(req, res) {
     res.sendFile(path.join(__dirname, 'app_client', 'index.html'));

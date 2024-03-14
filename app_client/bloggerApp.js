@@ -1,5 +1,11 @@
 var app = angular.module('bloggerApp', ['ngRoute']);
 
+//Helper method to add authentication headers
+var makeAuthHeader = function() {
+    var token = window.localStorage['blogger-token'];
+    return { headers: { Authorization: 'Bearer ' + token } }
+};
+
 //Router provider
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider
@@ -28,6 +34,19 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'DeleteController',
             controllerAs: 'vm'
         })
+
+        .when('/register', {
+            templateUrl: '/register.html',
+            controller: 'RegisterController',
+            controllerAs: 'vm'
+        })
+
+        .when('/login', {
+            templateUrl: '/login.html',
+            controller: 'LoginController',
+            controllerAs: 'vm'
+        })
+
         .otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode({
@@ -45,7 +64,7 @@ app.service('BlogService', ['$http', function($http) {
     };
 
     this.addBlog = function(blog) {
-        return $http.post(apiBaseUrl, blog);
+        return $http.post(apiBaseUrl, blog, {headers: {Authorization: 'Bearer' + authentication.getToken() }} );
     };
 
     this.getBlog = function(blogId) {
@@ -53,11 +72,11 @@ app.service('BlogService', ['$http', function($http) {
     };
 
     this.updateBlog = function(blogId, blog) {
-        return $http.put(apiBaseUrl + '/' + blogId, blog);
+        return $http.put(apiBaseUrl + '/' + blogId, blog, {headers: {Authorization: 'Bearer' + authentication.getToken() }} );
     };
 
     this.deleteBlog = function(blogId) {
-        return $http.delete(apiBaseUrl + '/' + blogId);
+        return $http.delete(apiBaseUrl + '/' + blogId, {headers: {Authorization: 'Bearer' + authentication.getToken() }} );
     };
 }]);
 

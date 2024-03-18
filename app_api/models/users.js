@@ -23,12 +23,12 @@ var userSchema = new mongoose.Schema({
 // Methods for the user schema
 userSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('base64');
 };
 
 // Validate the password
 userSchema.methods.validPassword = function(password) {
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('base64');
     return this.hash === hash;
 };
 

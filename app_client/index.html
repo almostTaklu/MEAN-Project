@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html ng-app="bloggerApp">
-    <head>
-        <meta charset="utf-8">
-        <title>Ganga Acharya Blog Site</title>
-        <base href="/">
 
-        <link rel="stylesheet" href="stylesheets/style.css">
-        <script src = "lib/angular.min.js"></script>
-        <script src = "lib/angular-route.min.js"></script>
-        
-        <script src = "bloggerApp.js"></script>
-    </head>
-    <body>
-        <div ng-include ="'partials/head.html'"></div>
-        <div ng-controller ="NavigationController">
-            <navigation></navigation>
-        </div>
+<head>
+    <meta charset="utf-8">
+    <title>Ganga Acharya Blog Site</title>
+    <base href="/">
 
-        <script type="text/ng-template" id="/home.html">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+
+
+</head>
+
+<body>
+    <div ng-include="'partials/head.html'"></div>
+    <div ng-controller="NavigationController">
+        <navigation></navigation>
+    </div>
+
+    <div ng-view></div>
+
+    <script type="text/ng-template" id="/home.html">
             <div class="container mt-5">
                 <div class="jumbotron">
                     <h1 class="display-4">{{ vm.title }}</h1>
@@ -28,10 +32,10 @@
                 </div>
             </div>
         </script>
-        
 
-        <!-- blogList.html -->
-        <script type="text/ng-template" id="/blogList.html">
+
+    <!-- blogList.html -->
+    <script type="text/ng-template" id="/blogList.html">
     <div class="container"> 
         <h1 class="title-spacing">{{ vm.title }}</h1>
 
@@ -47,10 +51,10 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
                         <div>
-                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit">
+                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete">
+                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>
@@ -64,33 +68,34 @@
     </div>
 </script>
 
-        
-        <!-- blogAdd.html -->
-        <script type="text/ng-template" id="/blogAdd.html">
-            <div class="container edit-blog-container" ng-controller="AddController as vm">
-                <h1 class="edit-blog-header">Add Blog Post</h1>
-                <form ng-submit="vm.addBlog()" class="edit-form">
-                    <div class="form-group">
-                        <label for="blogTitle">Title:</label>
-                        <input type="text" class="form-control" id="blogTitle" ng-model="vm.blog.blogTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="blogText">Body:</label>
-                        <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="5" required></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Add Post</button>
-                    </div>
-                </form>
+
+    <!-- blogAdd.html -->
+    <script type="text/ng-template" id="/blogAdd.html">
+    <div class="container edit-blog-container">
+        <h1 class="edit-blog-header">Add Blog Post</h1>
+        <form ng-submit="vm.submitBlog()" ng-controller="AddController as vm" method = "POST" class="edit-form">
+            <div class="form-group">
+                <label for="blogTitle">Title:</label>
+                <input type="text" class="form-control" id="blogTitle" ng-model="vm.blog.blogTitle" required>
             </div>
-        </script>
-        
-        <!-- blogEdit.html -->
-        <script type="text/ng-template" id="/blogEdit.html">
+            <div class="form-group">
+                <label for="blogText">Body:</label>
+                <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="5" required></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Post</button>
+            </div>
+        </form>
+    </div>
+</script>
+
+
+    <!-- blogEdit.html -->
+    <script type="text/ng-template" id="/blogEdit.html">
             <div class="container mt-5" ng-controller="EditController as vm">
                 <div class="edit-blog-container">
                     <h1 class="edit-blog-header">Edit Blog</h1>
-                    <form ng-submit="vm.updateBlog()" class="edit-form">
+                    <form ng-submit="vm.editBlog()" class="edit-form">
                         <div class="form-group">
                             <label for="blogTitle">Blog Title</label>
                             <input class="form-control" id="title" ng-model="vm.blog.blogTitle">
@@ -105,15 +110,18 @@
             </div>
         </script>
 
-        <!-- blogDelete.html -->
-        <script type="text/ng-template" id="/blogDelete.html">
-            <div class="container mt-5" ng-controller="DeleteController as vm">
+    <!-- blogDelete.html -->
+    <script type="text/ng-template" id="/blogDelete.html">
+            <div class="container mt-5">
                 <div class="form-container">
                     <h1 class="form-header">Delete Blog</h1>
                     <div class="delete-warning">
                         <p>Are you sure you want to delete this blog? This action cannot be undone.</p>
                     </div>
-                    <form ng-submit="vm.deleteBlog()" class="form-body">
+                    <form ng-submit="vm.deleteBlog()" class="form-body" ng-controller="DeleteController" method="POST">
+                        <div role = "alert" ng-show="vm.formError" class="alert alert-danger">
+                            {{ vm.formError }}
+                        </div>
                         <div class="form-group">
                             <label for="blogTitle">Blog Title</label>
                             <input readonly class="form-control" id="title" ng-model="vm.blog.blogTitle">
@@ -131,23 +139,26 @@
             </div>
         </script>
 
-        <!-- Register -->
-        <script type="text/ng-template" id="/register.html">
-            <div class="container mt-5" ng-controller="RegisterController as vm">
+    <!-- Register -->
+    <script type="text/ng-template" id="/register.html">
+            <div class="container mt-5">
                 <div class="form-container">
                     <h1 class="form-header">Register</h1>
-                    <form ng-submit="vm.register()" class="form-body">
+                    <form ng-submit="vm.onRegister()" class="form-body">
+                        <div role = "alert" ng-show="vm.formError" class="alert alert-danger">
+                            {{ vm.formError }}
+                        </div>
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
-                            <input type="text" class="form-control" id="fullName" ng-model="vm.user.fullName" required>
+                            <input type="text" class="form-control" id="fullName" ng-model="vm.credentials.name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" ng-model="vm.user.email" required>
+                            <input type="email" class="form-control" id="email" ng-model="vm.credentials.email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" ng-model="vm.user.password" required>
+                            <input type="password" class="form-control" id="password" ng-model="vm.credentials.password" required>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">Register</button>
@@ -158,19 +169,22 @@
             </div>
         </script>
 
-        <!-- login page -->
-        <script type="text/ng-template" id="/login.html">
-            <div class="container mt-5" ng-controller="LoginController as vm">
+    <!-- login page -->
+    <script type="text/ng-template" id="/login.html">
+            <div class="container mt-5">
                 <div class="form-container">
                     <h1 class="form-header">Login</h1>
-                    <form ng-submit="vm.login()" class="form-body">
+                    <form ng-submit="vm.onSubmit()" class="form-body">
+                        <div role = "alert" ng-show="vm.formError" class="alert alert-danger">
+                            {{ vm.formError }}
+                        </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" ng-model="vm.user.email" required>
+                            <input type="email" class="form-control" id="email" ng-model="vm.credentials.email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" ng-model="vm.user.password" required>
+                            <input type="password" class="form-control" id="password" ng-model="vm.credentials.password" required>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">Login</button>
@@ -181,11 +195,11 @@
             </div>
         </script>
 
-        <div ng-view></div>
-        <script src = "/nav/navigation.js"></script>
-        <script src = "/auth/authentication.js"></script>
-        <script src = "/bootstrap/js/jquery.min.js"></script>
-        <script src = "/bootstrap/js/bootstrap.min.js"></script>
-    </body>
+    <script src="bloggerApp.js"></script>
+    <script src="common/nav/navigation.js"></script>
+    <script src="common/auth/authentication.js"></script>
+    <script src="/bootstrap/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
 
 </html>

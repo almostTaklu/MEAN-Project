@@ -8,11 +8,9 @@ var sendJSONresponse = function (res, status, content) {
 };
 
 // Register a new user
-module.exports.register = function (req, res) {
+module.exports.register = function(req, res) {
     if (!req.body.name || !req.body.email || !req.body.password) {
-        sendJSONresponse(res, 400, {
-            "message": "All fields required"
-        });
+        sendJSONresponse(res, 400, { "message": "All fields required" });
         return;
     }
 
@@ -21,13 +19,12 @@ module.exports.register = function (req, res) {
     user.email = req.body.email;
     user.setPassword(req.body.password);
 
-    user.save(function (err) {
+    user.save().then(function() {
         var token;
         token = user.generateJwt();
-        res.status(200);
-        res.json({
-            "token": token
-        });
+        res.status(200).json({"token": token});
+    }).catch(function(err) {
+        sendJSONresponse(res, 404, err);
     });
 };
 

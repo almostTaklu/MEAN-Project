@@ -6,5 +6,4 @@ var blogSchema = new mongoose.Schema({
     createdOn: { type: Date, default: Date.now }
 });
 
-mongoose.model('Blog', blogSchema);console.log("Blog model:", mongoose.model('Blog', blogSchema)); 
-module.exports = mongoose.model('Blog', blogSchema);
+mongoose.model('Blog', blogSchema);

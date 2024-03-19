@@ -3,12 +3,12 @@ var app = angular.module('bloggerApp');
 //Authentication service and methods
 app.service('authentication', ['$http', '$window', function($http, $window) {
     var saveToken = function(token) {
-        $window.localStorage['blogger-token'] = token;
+        $window.localStorage['blog-token'] = token;
     };
 
     //Get token from local storage
     var getToken = function(){
-        return $window.localStorage ['blogger-token'];
+        return $window.localStorage ['blog-token'];
     };
 
     //Register user
@@ -29,19 +29,18 @@ app.service('authentication', ['$http', '$window', function($http, $window) {
 
     //Logout user
     var logout = function(){
-        $window.localStorage.removeItem('blogger-token');
+        $window.localStorage.removeItem('blog-token');
     };
 
     // Check if the user is logged in
 var isLoggedIn = function() {
     var token = getToken();
-    // Make sure the token is not null or empty before decoding
+    // If there is a token, decode it and check if it is still valid
     if(token) {
         try {
             var payload = JSON.parse($window.atob(token.split('.')[1]));
             return payload.exp > Date.now() / 1000;
         } catch (e) {
-            // Handle decoding error or token format issues
             console.error("Error decoding token: ", e);
             return false;
         }

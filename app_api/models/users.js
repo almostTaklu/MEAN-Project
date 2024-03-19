@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-//mongoose.set('userFindAndModify', false);
-//mongoose.set('useCreateIndex', true);
-
+// mongoose.set('useNewUrlParser', true); // Included to avoid warnings
+// mongoose.set('useFindAndModify', false); // Included to avoid warnings
+// mongoose.set('useCreateIndex', true); // Included to avoid warnings
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-// Define the user schema
+// Users Schema
 var userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -20,19 +20,19 @@ var userSchema = new mongoose.Schema({
     salt: String
 });
 
-// Methods for the user schema
+// Set password
 userSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('base64');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
 };
 
-// Validate the password
+// Validate password
 userSchema.methods.validPassword = function(password) {
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('base64');
+    var hash = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
     return this.hash === hash;
 };
 
-// Generate a JSON Web Token
+// Generate JWT
 userSchema.methods.generateJwt = function() {
     var expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
@@ -41,9 +41,8 @@ userSchema.methods.generateJwt = function() {
         _id: this._id,
         email: this.email,
         name: this.name,
-        exp: parseInt(expiry.getTime() / 1000)
-    }, process.env.JWT_SECRET);
+        exp: parseInt(expiry.getTime() / 1000),
+    }, process.env.JWT_SECRET); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-// Compile the schema into a model
 mongoose.model('User', userSchema);

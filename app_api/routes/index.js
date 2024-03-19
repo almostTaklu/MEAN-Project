@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
+
 var auth = jwt({
-    secret: process.env.JWT_SECRET,
-    userProperty: 'payload'
+	secret: process.env.JWT_SECRET,
+	userProperty: 'payload'
 });
+
 var ctrlBlog = require('../controllers/blogApiCtrl')
 var ctrlAuth = require('../controllers/authentication');
 
@@ -17,6 +19,6 @@ router.delete('/blogs/:blogid', auth, ctrlBlog.blogDeleteOne);    // DELETE /api
 
 // Define routes for authentication
 router.post('/register', ctrlAuth.register); // POST /api/register
-router.post('/login', ctrlAuth.login);   // POST /api/login
+router.post('/login', ctrlAuth.login);  // POST /api/login
 
 module.exports = router;

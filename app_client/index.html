@@ -49,7 +49,7 @@
                         <p class="card-text">{{ blog.blogText }}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <span class="posted-date">Posted on {{ blog.createdOn | date:'mediumDate' }}</span>
+                        <span class="posted-date">Posted on {{ blog.createdOn }}</span>
                         <div>
                             <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-edit"></i>

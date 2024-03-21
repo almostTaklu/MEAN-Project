@@ -1,15 +1,8 @@
 var mongoose = require('mongoose');
+var moment = require('moment-timezone');
 
-var getNewDate = function() {
-    return new Date().toLocaleString("en-US", { 
-        timeZone: "America/New_York",
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true});
+var getNewDate = function(){
+    return moment().tz("America/New_York").format("MM/DD/YYYY, hh:mm a");
 }
 
 var blogSchema = new mongoose.Schema({

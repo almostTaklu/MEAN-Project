@@ -77,6 +77,7 @@ a {
     transition: 0.3s;
     color: #333;
     border-radius: 10px; /* Adds rounded corners to the card */
+    margin-bottom: 20px;
 }
 
 .card:hover {

@@ -119,6 +119,7 @@ a {
     padding: 10px 15px; /* Adjust padding as needed */
     display: flex; /* Use flexbox for the footer */
     justify-content: space-between; /* Space between date and icons */
+    flex-wrap: nowrap; /* Wrap items if they overflow */
     align-items: center; /* Align items vertically */
     border-bottom-left-radius: 10px; /* Rounded corners on the bottom */
     border-bottom-right-radius: 10px;
@@ -137,6 +138,36 @@ a {
 .card-footer .icon-link:hover {
     color: #0077B6; /* Light blue for hover states */
 }
+
+.card-footer .posted-date {
+    flex: 1; /* Allows this item to grow and fill available space */
+    white-space: nowrap; /* Prevents the text from wrapping */
+}
+
+.card-footer .icon-link {
+    flex-shrink: 0; /* Prevents icons from shrinking */
+}
+
+
+.card-footer div {
+    display: flex; /* Use flexbox for the footer */
+    gap: 5px; /* Space between icons */
+}
+
+.card-footer > div, .card-footer .posted-date {
+    display: flex;
+    align-items: center; /* Aligns items vertically in the center */
+}
+
+@media (max-width: 768px) {
+    .card-footer {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+    }
+    .card-footer .posted-date {
+        margin-bottom: 10px; /* Adds some space between the date and icons when stacked */
+    }
+}
+
 
 /* Specific Styles for Edit Page */
 .edit-blog-container {

@@ -101,6 +101,13 @@ app.controller('ListController', ['BlogService','authentication',
             authentication.logout();
         };
 
+        vm.currentUser = function() {
+            return authentication.currentUser();
+        };
+
+        console.log('Is Logged In:', vm.isLoggedIn());
+        console.log('Current User:', vm.currentUser());
+
         BlogService.listBlogs().then(function(response) {
             vm.blogs = response.data;
             vm.message = "Blogs found";
@@ -117,7 +124,12 @@ app.controller('AddController', ['$location', 'BlogService', 'authentication',
         vm.title = 'Add Blog';
 
         vm.submitBlog = function() {
+            var currentUser = authentication.currentUser();
+            vm.blog.author = currentUser.name;
+            vm.blog.authorEmail = currentUser.email;
+
             console.log('Adding blog:', vm.blog);   //debugging
+
             BlogService.addBlog(vm.blog)
                 .then(function(response) {
                     vm.message = 'Blog added successfully';

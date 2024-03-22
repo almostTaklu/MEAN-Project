@@ -43,18 +43,18 @@
             <div ng-repeat="blog in vm.blogs" class="col-md-4"> 
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">{{ blog.blogTitle }}</h5>
+                        <h5 class="card-title">{{ blog.blogTitle }} </h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ blog.blogText }}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <span class="posted-date">Posted on {{ blog.createdOn }}</span>
+                        <span class="posted-date">Posted on {{ blog.createdOn }} by {{blog.author }} </span>
                         <div>
-                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
+                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit" ng-show="vm.isLoggedIn() && vm.currentUser().email == blog.authorEmail">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete" ng-show="vm.isLoggedIn()">
+                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete" ng-show="vm.isLoggedIn() && vm.currentUser().email == blog.authorEmail">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>

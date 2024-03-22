@@ -49,3 +49,4 @@ process.on('SIGTERM', async () => {
 
 //Bring in schema and models
 require('./blogs');
+require('./users');

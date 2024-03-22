@@ -10,8 +10,13 @@ body {
     font: 16px 'Roboto', sans-serif;
   }
 
-a, .btn-primary {
+.btn-primary {
   color: #fff;
+}
+
+a {
+    color: #0077B6;
+    text-decoration: none;
 }
 
 .title-spacing, .title-spacing-add {
@@ -23,13 +28,13 @@ a, .btn-primary {
 .navbar {
     background-color: #003366 !important;
     padding: 1rem 2rem;
-    font-size: 18px; /* Increased size */
+    font-size: 15px; /* Increased size */
     font-family: 'Arial', sans-serif; /* Change as per preference */
 }
 
 .navbar-brand, .nav-link {
     color: #ffffff;
-    font-size: 22px; /* Increase the font size for the brand and links */
+    font-size: 18px; /* Increase the font size for the brand and links */
     font-weight: bold; /* Medium font weight for a little emphasis */
     transition: color 0.2s; /* Smooth transition for hover effects */
 }
@@ -40,7 +45,7 @@ a, .btn-primary {
 
 .navbar .navbar-brand {
     color:#fff;
-    font-size: 26px;
+    font-size: 30px;
 }
 
 .navbar .navbar-brand:hover, .navbar .nav-link:hover {
@@ -72,6 +77,7 @@ a, .btn-primary {
     transition: 0.3s;
     color: #333;
     border-radius: 10px; /* Adds rounded corners to the card */
+    margin-bottom: 20px;
 }
 
 .card:hover {

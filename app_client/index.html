@@ -6,16 +6,17 @@
     <title>Ganga Acharya Blog Site</title>
     <base href="/">
 
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/all.min.css">
     <script src="lib/angular.min.js"></script>
-    <!-- <script src="lib/angular-route.min.js"></script> -->
-    <script src="https://unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-ui-router.js"></script>
 
 
 </head>
 
 <body>
-    <div ng-include="'partials/head.html'"></div>
+    <!--> <div ng-include="'partials/head.html'"></div> <!-->
     <div ng-controller="NavigationController">
         <navigation></navigation>
     </div>
@@ -194,13 +195,38 @@
                     <p class="text-center">Not a member? <a ui-sref="register">Register</a></p>
                 </div>
             </div>
-        </script>
+    </script>
 
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="bloggerApp.js"></script>
     <script src="common/nav/navigation.js"></script>
     <script src="common/auth/authentication.js"></script>
-    <script src="/bootstrap/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for click events on the document
+            document.addEventListener('click', function (event) {
+                const clickedElement = event.target;
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+                // Check if the navbar is expanded
+                if (!navbarCollapse.classList.contains('show')) {
+                    return;
+                }
+        
+                // Check if the click is inside the navbar
+                if (navbarToggler.contains(clickedElement) || navbarCollapse.contains(clickedElement)) {
+                    return;
+                }
+        
+                // Since the click is outside and the navbar is open, simulate a click on the navbar toggler to close it
+                navbarToggler.click();
+            })
+        });
+        </script>
+        
+
 </body>
 
 </html>

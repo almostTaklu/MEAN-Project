@@ -8,7 +8,8 @@
 
     <link rel="stylesheet" href="stylesheets/style.css">
     <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-route.min.js"></script>
+    <!-- <script src="lib/angular-route.min.js"></script> -->
+    <script src="https://unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
 
 
 </head>
@@ -19,7 +20,7 @@
         <navigation></navigation>
     </div>
 
-    <div ng-view></div>
+    <div ui-view></div>
 
     <script type="text/ng-template" id="/home.html">
             <div class="container mt-5">
@@ -28,7 +29,7 @@
                     <p class="lead">{{ vm.message }}</p>
                     <hr class="my-4">
                     <p>Click below to view/edit/delete blog posts</p>
-                    <a class="btn btn-primary btn-lg" href="/blogList" role="button">View Blogs</a>
+                    <a class="btn btn-primary btn-lg" ui-sref="blogList" role="button">View Blogs</a>
                 </div>
             </div>
         </script>
@@ -51,10 +52,10 @@
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <span class="posted-date">Posted on {{ blog.createdOn }}</span>
                         <div>
-                            <a ng-href="/blogEdit/{{ blog._id }}" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
+                            <a ui-sref="blogEdit({blogid: blog._id})" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a ng-href="/blogDelete/{{ blog._id }}" class="icon-link" title="Delete" ng-show="vm.isLoggedIn()">
+                            <a ui-sref="blogDelete({blogid: blog._id})" class="icon-link" title="Delete" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>
@@ -62,7 +63,7 @@
                 </div>
             </div>
             <div ng-if="!vm.blogs.length" class="col-12">
-                <p>There are no posts yet. <a ng-href="/blogAdd">Click here</a> to add a new post.</p>
+                <p>There are no posts yet. <a ui-sref="blogAdd">Click here</a> to add a new post.</p>
             </div>
         </div>
     </div>
@@ -132,7 +133,7 @@
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-danger">Delete</button>
-                            <a ng-href="/blogList" class="btn btn-secondary">Cancel</a>
+                            <a ui-sref="blogList" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -164,7 +165,7 @@
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                     </form>
-                    <p class="text-center">Already a member? <a ng-href="/login">Sign in</a></p>
+                    <p class="text-center">Already a member? <a ui-sref="login">Sign in</a></p>
                 </div>
             </div>
         </script>
@@ -190,7 +191,7 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
-                    <p class="text-center">Not a member? <a ng-href="/register">Register</a></p>
+                    <p class="text-center">Not a member? <a ui-sref="register">Register</a></p>
                 </div>
             </div>
         </script>

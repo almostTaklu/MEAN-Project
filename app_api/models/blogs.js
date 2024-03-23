@@ -6,8 +6,16 @@ var getNewDate = function(){
 }
 
 var blogSchema = new mongoose.Schema({
-    blogTitle: String,
-    blogText: String,
+    blogTitle: {
+        type: String,
+        required: true
+    },
+
+    blogText: {
+        type: String,
+        required: true
+    },
+    
     createdOn: { 
         type: String, 
         "default": getNewDate 

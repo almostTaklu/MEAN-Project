@@ -5,9 +5,9 @@ var User = mongoose.model('User');
 
 passport.use(new LocalStrategy({
     usernameField: 'email'
-}, async (email, password, done) => {
+}, async (username, password, done) => {
     try {
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: username });
         if (!user) {
             return done(null, false, {
                 message: 'Incorrect email or password.'

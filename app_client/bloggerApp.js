@@ -1,53 +1,60 @@
-var app = angular.module('bloggerApp', ['ngRoute']);
+var app = angular.module('bloggerApp', ['ui.router']);
 
 //Router provider
-app.config(function($routeProvider, $locationProvider) {
-    $routeProvider
-        .when('/', {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $stateProvider
+        .state('home', {
+            url: '/',
             templateUrl: '/home.html',
             controller: 'HomeController',
             controllerAs: 'vm'
         })
-        .when('/blogList', {
+        .state('blogList', {
+            url: '/blogList',
             templateUrl: '/blogList.html',
             controller: 'ListController',
             controllerAs: 'vm'
         })
-        .when('/blogAdd', {
+        .state('blogAdd', {
+            url: '/blogAdd',
             templateUrl: '/blogAdd.html',
             controller: 'AddController',
             controllerAs: 'vm'
         })
-        .when('/blogEdit/:blogid', {
+        .state('blogEdit', {
+            url: '/blogEdit/:blogid',
             templateUrl: '/blogEdit.html',
             controller: 'EditController',
             controllerAs: 'vm'
         })
-        .when('/blogDelete/:blogid', {
+        .state('blogDelete', {
+            url: '/blogDelete/:blogid',
             templateUrl: '/blogDelete.html',
             controller: 'DeleteController',
             controllerAs: 'vm'
         })
-
-        .when('/register', {
+        .state('register', {
+            url: '/register',
             templateUrl: '/register.html',
             controller: 'RegisterController',
             controllerAs: 'vm'
         })
-
-        .when('/login', {
+        .state('login', {
+            url: '/login',
             templateUrl: '/login.html',
             controller: 'LoginController',
             controllerAs: 'vm'
-        })
+        });
 
-        .otherwise({redirectTo: '/'});
+    // Default fallback for unmatched urls
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
     });
-});
+}]);
+
 
 //Service for API calls
 app.service('BlogService', ['$http', 'authentication', function($http, authentication) {
@@ -129,10 +136,10 @@ app.controller('AddController', ['$location', 'BlogService', 'authentication',
 }]);
 
 // Controller for editing blogs
-app.controller('EditController', ['$routeParams', '$location', 'BlogService', 'authentication', 
-    function EditController($routeParams, $location, BlogService, authentication) {
+app.controller('EditController', ['$stateParams', '$location', 'BlogService', 'authentication', 
+    function EditController($stateParams, $location, BlogService, authentication) {
         var vm = this;
-        var blogId = $routeParams.blogid;
+        var blogId = $stateParams.blogid;
         vm.blog = {};
         vm.title = 'Edit Blog';
 
@@ -152,11 +159,11 @@ app.controller('EditController', ['$routeParams', '$location', 'BlogService', 'a
 }]);
 
 // Controller for deleting blogs
-app.controller('DeleteController', ['$routeParams', '$location', 'BlogService', 'authentication', 
-    function DeleteController($routeParams, $location, BlogService, authentication) {
+app.controller('DeleteController', ['$stateParams', '$location', 'BlogService', 'authentication', 
+    function DeleteController($stateParams, $location, BlogService, authentication) {
         var vm = this;
         vm.blog = {};
-        var blogId = $routeParams.blogid;
+        var blogId = $stateParams.blogid;
         vm.title = 'Delete Blog';
 
         BlogService.getBlog(blogId).then(function(response) {

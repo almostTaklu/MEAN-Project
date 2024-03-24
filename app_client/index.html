@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <!--> <div ng-include="'partials/head.html'"></div> <!-->
+    <div ng-include="'partials/head.html'"></div>
     <div ng-controller="NavigationController">
         <navigation></navigation>
     </div>
@@ -38,38 +38,47 @@
 
     <!-- blogList.html -->
     <script type="text/ng-template" id="/blogList.html">
-    <div class="container"> 
-        <h1 class="title-spacing">{{ vm.title }}</h1>
-
-        <div class="row">
-            <div ng-repeat="blog in vm.blogs" class="col-md-4"> 
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{ blog.blogTitle }} </h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ blog.blogText }}</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <span class="posted-date">Posted on {{ blog.createdOn }} by {{blog.author }} </span>
-                        <div>
-                            <a ui-sref="blogEdit({blogid: blog._id})" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
+    <div class="container py-5">
+        <h1 class="text-center mb-5">{{ vm.title }}</h1>
+        <div class="row g-4">
+            <div ng-repeat="blog in vm.blogs" class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-user-circle user-avatar"></i>
+                                <div class="ms-2">
+                                    <span class="user-name">{{ blog.author }}</span>
+                                </div>
+                            </div>
+                            <div class="post-date d-flex align-items-center">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="ms-1">{{ blog.createdOn | date:'mediumDate' }}</span>
+                            </div>
+                        </div>
+                        <h4 class="card-title mt-2 mb-3">{{ blog.blogTitle }}</h4>
+                        <p class="card-text flex-grow-1">{{ blog.blogText }}</p>
+                        <div class="mt-auto icon-actions">
+                            <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link" title="Edit" ui-sref="blogEdit({blogid: blog._id})">
                                 <i class="fas fa-edit"></i>
-                            </a>
-                            <a ui-sref="blogDelete({blogid: blog._id})" class="icon-link" title="Delete" ng-show="vm.isLoggedIn()">
+                            <!-- <a ui-sref="blogEdit({blogid: blog._id})" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
+                                <i class="fas fa-edit"></i>
+                            </a> -->
+                            <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link delete" title="Delete" ui-sref="blogDelete({blogid: blog._id})">
                                 <i class="fas fa-trash-alt"></i>
-                            </a>
+                            <!-- <a ui-sref="blogDelete({blogid: blog._id})" class="icon-link delete" title="Delete" ng-show="vm.isLoggedIn()">
+                                <i class="fas fa-trash-alt"></i>
+                            </a> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-if="!vm.blogs.length" class="col-12">
-                <p>There are no posts yet. <a ui-sref="blogAdd">Click here</a> to add a new post.</p>
+            <div ng-if="!vm.blogs.length" class="col-12 text-center">
+                <p class="mt-5">There are no posts yet. <a ui-sref="blogAdd" class="text-decoration-none">Click here</a> to add a new post.</p>
             </div>
         </div>
     </div>
-</script>
-
+    </script>
 
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">
@@ -82,35 +91,34 @@
             </div>
             <div class="form-group">
                 <label for="blogText">Body:</label>
-                <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="5" required></textarea>
+                <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="6" required></textarea>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Add Post</button>
             </div>
         </form>
     </div>
-</script>
-
+    </script>
 
     <!-- blogEdit.html -->
     <script type="text/ng-template" id="/blogEdit.html">
-            <div class="container mt-5" ng-controller="EditController as vm">
-                <div class="edit-blog-container">
-                    <h1 class="edit-blog-header">Edit Blog</h1>
-                    <form ng-submit="vm.editBlog()" class="edit-form">
-                        <div class="form-group">
-                            <label for="blogTitle">Blog Title</label>
-                            <input class="form-control" id="title" ng-model="vm.blog.blogTitle">
-                        </div>
-                        <div class="form-group">
-                            <label for="blogText">Content</label>
-                            <textarea class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Blog</button>
-                    </form>
-                </div>
+        <div class="container mt-5" ng-controller="EditController as vm">
+            <div class="edit-blog-container">
+                <h1 class="edit-blog-header">Edit Blog</h1>
+                <form ng-submit="vm.editBlog()" class="edit-form">
+                    <div class="form-group">
+                        <label for="blogTitle">Blog Title</label>
+                        <input class="form-control" id="title" ng-model="vm.blog.blogTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="blogText">Content</label>
+                        <textarea class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Blog</button>
+                </form>
             </div>
-        </script>
+        </div>
+    </script>
 
     <!-- blogDelete.html -->
     <script type="text/ng-template" id="/blogDelete.html">
@@ -130,7 +138,7 @@
                         </div>
                         <div class="form-group">
                             <label for="blogText">Content</label>
-                            <textarea readonly class="form-control" id="entry" rows="3" ng-model="vm.blog.blogText"></textarea>
+                            <textarea readonly class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -209,23 +217,23 @@
                 const clickedElement = event.target;
                 const navbarToggler = document.querySelector('.navbar-toggler');
                 const navbarCollapse = document.querySelector('.navbar-collapse');
-        
+
                 // Check if the navbar is expanded
                 if (!navbarCollapse.classList.contains('show')) {
                     return;
                 }
-        
+
                 // Check if the click is inside the navbar
                 if (navbarToggler.contains(clickedElement) || navbarCollapse.contains(clickedElement)) {
                     return;
                 }
-        
+
                 // Since the click is outside and the navbar is open, simulate a click on the navbar toggler to close it
                 navbarToggler.click();
             })
         });
-        </script>
-        
+    </script>
+
 
 </body>
 

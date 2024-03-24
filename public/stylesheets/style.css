@@ -1,173 +1,182 @@
 body {
-    /* background: linear-gradient(135deg, #003366 0%, #0077B6 80%); */
-    /* color: #ffffff; /* Ensures text contrasts well against the dark background */
-    /* background-attachment: fixed; /* Keeps the background fixed during scrolling */
-    /* background-size: cover; /* Covers the entire screen */
-    padding-top: 0px;
-    padding-bottom: 10px;
-    padding-left: 0;
-    padding-right: 0;
-    font: 16px 'Roboto', sans-serif;
-  }
-
-.btn-primary {
-  color: #fff;
+    font: 16px 'Nunito Sans', sans-serif;
+    background-color: #f7f8fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-a {
-    color: #0077B6;
+a, .btn-primary {
+    color: #fff;
     text-decoration: none;
 }
 
-.title-spacing, .title-spacing-add {
-    margin-top: 50px;
-    margin-bottom: 30px;
-    text-align: center;
+a:hover, .btn-primary:hover {
+    background-color: #365981;
+    color: #A0E6D6;
 }
 
 .navbar {
-    background-color: #003366 !important;
+    background-color: #365981 !important;
     padding: 1rem 2rem;
-    font-size: 15px; /* Increased size */
-    font-family: 'Arial', sans-serif; /* Change as per preference */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 17px;
+    font-family: 'Arial', sans-serif;
 }
 
-.navbar-brand, .nav-link {
-    color: #ffffff;
-    font-size: 18px; /* Increase the font size for the brand and links */
-    font-weight: bold; /* Medium font weight for a little emphasis */
-    transition: color 0.2s; /* Smooth transition for hover effects */
-}
-
-.navbar .nav-link {
-    color: #fff;
-}
-
-.navbar .navbar-brand {
-    color:#fff;
-    font-size: 30px;
+.navbar-brand, .nav-link, .navbar .navbar-brand, .navbar .nav-link {
+    color: #A0E6D6;
+    font-weight: bold;
+    transition: color 0.2s;
 }
 
 .navbar .navbar-brand:hover, .navbar .nav-link:hover {
-    color: #0077B6; /* Light blue for hover states */
+    color: #EAF1E0;
 }
 
 .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(150,123,183);
     border: none;
 }
 
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>"); /* Custom icon color */
-}
-
-.icon-link {
-    color: #00B7C3;
-    font-size: 22px;
-    text-decoration: none;
-    margin-right: 10px;
-}
-
-.icon-link:hover {
-    color: #0077B6;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
 }
 
 .card {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: 0.3s;
-    color: #333;
-    border-radius: 10px; /* Adds rounded corners to the card */
-    margin-bottom: 20px;
+    width: 100%; /* Use 100% of the column width */
+    max-width: 380px; /* Slightly larger card */
+    margin: 0 auto 20px; /* Centered with margin at the bottom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease; /* Smooth transform transition */
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
 }
 
-.card .card-body .card-title {
-    font-size: 24px; /* Larger font size for the title */
-    font-weight: bold; /* Makes the title bold */
-    color: #333; /* Dark color for better visibility */
+.card-body {
+    padding: 15px;
+    padding-top: 20px;
 }
 
-.card .card-body .card-text {
-    font-size: 16px;
-    color: #555; /* Slightly lighter than the title for contrast */
-    margin-top: 10px; /* Adds some space between the title and text */
-}
-
-.text-muted {
-    font-size: 14px; /* Smaller font size for the date */
-}
-
-.card-header {
-    background-color: #003366;
-    color: #ffffff; /* White color for the title text */
-    padding: 10px 15px; /* Adjust padding as needed */
-    border-top-left-radius: 10px; /* Rounded corners on the top */
-    border-top-right-radius: 10px;
-}
-
-.card-title {
-    margin-bottom: 0; /* Remove margin to fit nicely in the header */
-}
-
-.card-footer {
-    background-color: #f8f9fa; /* Light grey background */
-    color: #0077B6;
-    padding: 10px 15px; /* Adjust padding as needed */
-    display: flex; /* Use flexbox for the footer */
-    justify-content: space-between; /* Space between date and icons */
-    flex-wrap: nowrap; /* Wrap items if they overflow */
-    align-items: center; /* Align items vertically */
-    border-bottom-left-radius: 10px; /* Rounded corners on the bottom */
-    border-bottom-right-radius: 10px;
-}
-
-.posted-date {
-    font-size: 0.9rem; /* Adjust the font size as needed */
-    color: #6c757d; /* Bootstrap's secondary text color for contrast */
-}
-
-.card-footer .icon-link {
-    margin-left: 5px; /* Space between icons */
-    color: #003366; /* Keep the icon color consistent with the header */
-}
-
-.card-footer .icon-link:hover {
-    color: #0077B6; /* Light blue for hover states */
-}
-
-.card-footer .posted-date {
-    flex: 1; /* Allows this item to grow and fill available space */
-    white-space: nowrap; /* Prevents the text from wrapping */
-}
-
-.card-footer .icon-link {
-    flex-shrink: 0; /* Prevents icons from shrinking */
-}
-
-
-.card-footer div {
-    display: flex; /* Use flexbox for the footer */
-    gap: 5px; /* Space between icons */
-}
-
-.card-footer > div, .card-footer .posted-date {
+.card .user-info {
     display: flex;
-    align-items: center; /* Aligns items vertically in the center */
+    justify-content: space-between; /* Adjust this to manage space between author and date */
+    align-items: center;
+    width: 100%;
+}
+
+.card .user-avatar {
+    font-size: 1.6rem; /* Adjusting the font size of the avatar for closer proximity */
+    color: #365981;
+    margin-right: 3px; /* Reduced space to the right of the avatar */
+}
+
+.card .user-name {
+    font-weight: none;
+    margin: 0; /* Removes additional margin */
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #000;
+    flex-grow: 0; /* Allows the name to fill the space, pushing the date to the right */
+}
+
+.card .post-date {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.card .post-date i {
+    margin-right: 5px;
+    font-size: 1rem;
+}
+
+
+/* Title spacing */
+.card .card-title {
+    display: block;
+    font-size: 1.25rem; /* Adjusted font size for better visibility */
+    font-weight: bold; /* Make sure the title is bold */
+    color: #333; /* Ensure the color is set correctly for visibility */
+    margin-top: 20px !important;
+    margin-bottom: 1rem !important;
+}
+
+
+/* Text and icon section */
+.card .card-text {
+    font-size: 1rem; /* Maintain readability */
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem; /* Space before the icons */
+}
+
+.icon-actions {
+    display: flex;
+    justify-content: flex-end; /* Align icons to the right */
+    padding-top: 0.5rem; /* Ensure there's space between text and icons */
 }
 
 @media (max-width: 768px) {
-    .card-footer {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
-    }
-    .card-footer .posted-date {
-        margin-bottom: 10px; /* Adds some space between the date and icons when stacked */
+    .card {
+        max-width: none; /* Full width on smaller screens */
     }
 }
 
+.icon-actions a {
+    display: inline-flex; /* Enables flexbox properties for the link */
+    align-items: center; /* Center aligns the icon vertically */
+    justify-content: center; /* Center aligns the icon horizontally */
+    width: 36px; /* Width of the clickable area */
+    height: 36px; /* Height of the clickable area */
+    border-radius: 50%; /* Makes the clickable area circular */
+    color: #365981; /* Default icon color */
+    background-color: transparent; /* Default background */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background and color */
+}
+.icon-link {
+    color: #365981;
+    font-size: 1.5rem; /* Slightly larger icons */
+    margin-left: 10px;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.icon-actions a:hover {
+    color: #0fadac; /* Icon color on hover */
+}
+
+.icon-actions a {
+    color: #0077B6; /* Icon color */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.icon-actions a.delete:hover {
+    color: #dd1c3e;
+}
+
+.fas {
+    font-size: 1.4rem;
+    cursor: pointer; 
+}
+
+.edit-blog-container, .form-container, .jumbotron {
+    max-width: auto;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    color: #333;
+    background-color: #fff;
+}
+
+.jumbotron .btn:hover, .jumbotron .btn:focus, .jumbotron .btn-primary:hover {
+    background-color: #0077B6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
 
 /* Specific Styles for Edit Page */
 .edit-blog-container {
@@ -234,7 +243,7 @@ a {
 
 /* Specific Styles for Delete Page */
 .delete-warning {
-    color: #dc3545; /* Bootstrap danger color */
+    color: #dc3545;
     font-weight: bold;
     margin-bottom: 20px;
     text-align: center;
@@ -260,8 +269,8 @@ a {
 }
 
 .jumbotron .btn {
-    background-color: #00b7c3; /* Custom button color */
-    color: #ffffff;
+    background-color: #A0e6d6; /* Custom button color */
+    color: #365981;
     border: none;
     padding: 10px 20px; /* Larger button padding */
     font-size: 18px; /* Larger font size */
@@ -271,15 +280,15 @@ a {
 }
 
 .jumbotron .btn:hover, .jumbotron .btn:focus {
-    background-color: #00B7C3; /* Lighter color on hover/focus */
+    background-color: #365981; /* Lighter color on hover/focus */
     box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Slightly larger shadow on hover/focus for a "lifting" effect */
-    color: #ffffff;
+    color: #a0e6d6;
     text-decoration: none;
     border: none;
 }
 
 .jumbotron .btn-primary:hover {
-    background-color: #0077B6; /* Custom button color */
+    background-color: #365981; /* Custom button color */
 }
 
 /* Footer Styles */
@@ -291,4 +300,10 @@ footer {
     font-size: 16px;
     bottom: 0;
     width: 100%;
+}
+
+.title-text-divider {
+    border-top: 2px solid #FB7941; /* Light grey color for a soft divider */
+    margin-top: 0rem; /* Reduced top margin for close spacing to the title */
+    margin-bottom: 1.5rem; /* Larger bottom margin to separate title from text */
 }

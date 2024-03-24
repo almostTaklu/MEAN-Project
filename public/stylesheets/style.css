@@ -5,13 +5,22 @@ body {
     margin: 0;
     padding: 0;
 }
+a{
+    color:#365981;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-a, .btn-primary {
+a:hover {
+    color: #0077B6;
+    text-decoration: none;
+}
+.btn-primary {
     color: #fff;
     text-decoration: none;
 }
 
-a:hover, .btn-primary:hover {
+.btn-primary:hover {
     background-color: #365981;
     color: #A0E6D6;
 }
@@ -71,7 +80,7 @@ a:hover, .btn-primary:hover {
 }
 
 .card .user-avatar {
-    font-size: 1.6rem; /* Adjusting the font size of the avatar for closer proximity */
+    font-size: 1.4rem; /* Adjusting the font size of the avatar for closer proximity */
     color: #365981;
     margin-right: 3px; /* Reduced space to the right of the avatar */
 }

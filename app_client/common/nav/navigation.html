@@ -16,6 +16,7 @@
                 <li class="nav-item" ng-show="!vm.isLoggedIn()">
                     <a class="nav-link" ui-sref="login">Sign In</a>
                 </li>
+
                 <li class="nav-item" ng-show="vm.isLoggedIn()">
                     <!-- Logout doesn't need a state, using ng-click is fine -->
                     <a class="nav-link" href="" ng-click="vm.logout()">Logout <small>({{ vm.currentUser().email }})</small></a>

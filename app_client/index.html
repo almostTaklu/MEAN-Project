@@ -6,9 +6,6 @@
     <title>Ganga Acharya Blog Site</title>
     <base href="/">
 
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/all.min.css">
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-ui-router.js"></script>
 
@@ -46,13 +43,13 @@
                     <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-user-circle user-avatar"></i>
+                                <i class="fas fa-solid fa-circle-user user-avatar"></i>
                                 <div class="ms-2">
                                     <span class="user-name">{{ blog.author }}</span>
                                 </div>
                             </div>
                             <div class="post-date d-flex align-items-center">
-                                <i class="fas fa-calendar-alt"></i>
+                                <i class="fas fa-solid fa-calendar-days"></i>
                                 <span class="ms-1">{{ blog.createdOn | date:'mediumDate' }}</span>
                             </div>
                         </div>
@@ -60,12 +57,12 @@
                         <p class="card-text flex-grow-1">{{ blog.blogText }}</p>
                         <div class="mt-auto icon-actions">
                             <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link" title="Edit" ui-sref="blogEdit({blogid: blog._id})">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-solid fa-pen-to-square"></i>
                             <!-- <a ui-sref="blogEdit({blogid: blog._id})" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-edit"></i>
                             </a> -->
                             <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link delete" title="Delete" ui-sref="blogDelete({blogid: blog._id})">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="fas fa-solid fa-trash"></i>
                             <!-- <a ui-sref="blogDelete({blogid: blog._id})" class="icon-link delete" title="Delete" ng-show="vm.isLoggedIn()">
                                 <i class="fas fa-trash-alt"></i>
                             </a> -->

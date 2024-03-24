@@ -121,13 +121,13 @@ a:hover {
 .card .card-text {
     font-size: 1rem; /* Maintain readability */
     margin-top: 0.5rem;
-    margin-bottom: 0.8rem; /* Space before the icons */
+    margin-bottom: 0.3rem !important; /* Space before the icons */
 }
 
 .icon-actions {
     display: flex;
     justify-content: flex-end; /* Align icons to the right */
-    padding-top: 0.5rem; /* Ensure there's space between text and icons */
+    padding-top: 0; /* Ensure there's space between text and icons */
 }
 
 @media (max-width: 768px) {

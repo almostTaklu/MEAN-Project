@@ -14,7 +14,10 @@ module.exports.blogCreate = async function (req, res) {
     try {
         const newBlog = await Blog.create({
             blogTitle: req.body.blogTitle,
-            blogText: req.body.blogText
+            blogText: req.body.blogText,
+            createdOn: req.body.createdOn,
+            author: req.body.author,
+            authorEmail: req.body.authorEmail
         });
         sendJSONresponse(res, 201, newBlog);
     } catch (err) {
@@ -93,13 +96,16 @@ const renderBlogList = function(req, res, responseBody) {
     const blogs = responseBody.map(blog => ({
         blogTitle: blog.blogTitle,
         blogText: blog.blogText,
+        createdOn: blog.createdOn,
+        author: blog.author,
+        authorEmail: blog.authorEmail,
         _id: blog._id
     }));
 
     return blogs;
 };
 
-// GET /api/blogs
+// GET /api/blogs - Using async/await and renderBlogList for formatting
 module.exports.blogList = async function (req, res) {
     console.log("Getting blogList");
 
@@ -111,8 +117,11 @@ module.exports.blogList = async function (req, res) {
             return res.status(404).json({ "message": "blogs not found" });
         }
 
-        // When blogs are found, send a 200 response with the blogs data.
-        res.status(200).json(blogs);
+        // Use renderBlogList to format the blogs data before sending it
+        const formattedBlogs = renderBlogList(req, res, blogs);
+
+        // When blogs are found and formatted, send a 200 response with the formatted blogs data.
+        res.status(200).json(formattedBlogs);
     } catch (err) {
         console.error(err);
         // If there's an error in the process, respond with a 500 status code and the error.

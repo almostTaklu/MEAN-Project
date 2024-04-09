@@ -6,28 +6,24 @@
     <base href="/">
 
     <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
 
     <!-- Angular and other library scripts -->
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-ui-router.js"></script>
     <script src="lib/angular-route.min.js"></script>
-    
-    <!-- Your AngularJS App Script -->
+
     <script src="bloggerApp.js"></script>
 
-    <!-- Dynamic title with ng-bind -->
     <title> Ganga's Blogsite </title>
-    
-
-
 </head>
 
 <body>
-    <!-- <div ng-include="'partials/head.html    '"></div> -->
     <div ng-controller="NavigationController">
         <navigation></navigation>
     </div>
@@ -71,16 +67,14 @@
                                     {{ blog.blogTitle }}
                                 </a>
                             </h4>
-                            <p class="card-text flex-grow-1">{{ blog.blogText | limitTo: 100 }}...</p>
-                            <div class="mt-auto">
+                            <p class="card-text flex-grow-1">{{ blog.blogText | limitTo: 150 }}...</p>
+                            <div class="mt-auto icon-actions">
                                 <a ng-show="vm.isLoggedIn() && vm.currentUser().email === blog.authorEmail"
-                                   class="icon-link" title="Edit"
-                                   ui-sref="blogEdit({blogid: blog._id})">
+                                   class="icon-link" title="Edit" ui-sref="blogEdit({blogid: blog._id})">
                                     <i class="fas fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a ng-show="vm.isLoggedIn() && vm.currentUser().email === blog.authorEmail"
-                                   class="icon-link delete" title="Delete"
-                                   ui-sref="blogDelete({blogid: blog._id})">
+                                   class="icon-link delete" title="Delete" ui-sref="blogDelete({blogid: blog._id})">
                                     <i class="fas fa-solid fa-trash"></i>
                                 </a>
                             </div>
@@ -93,20 +87,37 @@
             </div>
         </div>
         </script>
-    
+
         <script type="text/ng-template" id="/blogView.html">
-            <div class="container mt-5" ng-controller="ViewController as vm">
+            <div class="container mt-5 blog-view-container" ng-controller="ViewController as vm">
                 <h1>{{ vm.blog.blogTitle }}</h1>
                 <p>{{ vm.blog.blogText }}</p>
-                <h3>Comments:</h3>
-                <ul>
-                    <li ng-repeat="comment in vm.blog.comments">
-                        <strong>{{ comment.author }}</strong> on {{ comment.createdOn | date:'mediumDate' }}:
-                        <p>{{ comment.commentText }}</p>
+                <h3 class="comments-title">Comments:</h3>
+                <ul class="comment-list">
+                    <li class="comment-item" ng-repeat="comment in vm.blog.comments">
+                        <div class="comment-author-info">
+                            <i class="fas fa-user-circle comment-author-avatar"></i>
+                            <strong class="comment-author">{{ comment.author }}</strong>
+                            <span class="comment-date">{{ comment.createdOn | date:'mediumDate' }}</span>
+                        </div>
+                        <p class="comment-text">{{ comment.commentText }}</p>
+                        <!-- Enhanced reply link -->
+                        <span class="reply-link" ng-click="comment.showReply = !comment.showReply">
+                            <i class="fas fa-reply reply-icon"></i> Reply
+                        </span>
+                        <div ng-show="comment.showReply" class="reply-form">
+                            <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea"></textarea>
+                            <button ng-click="vm.addReply(comment._id)" class="btn btn-secondary">Post Reply</button>
+                        </div>
+                        <ul class="reply-list">
+                            <li class="reply-item" ng-repeat="reply in comment.replies">
+                                <strong>{{ reply.author }}</strong>: {{ reply.commentText }}
+                                <span class="reply-date">{{ reply.createdOn | date:'mediumDate' }}</span>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-                <!-- Conditionally display the comment form -->
-                <div ng-if="vm.isLoggedIn()">
+                <div ng-if="vm.isLoggedIn()" class="comment-form">
                     <form ng-submit="vm.addComment()">
                         <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."></textarea>
                         <button type="submit" class="btn btn-primary">Post Comment</button>
@@ -116,7 +127,7 @@
                     <p>To post comments, please <a ui-sref="login">login</a>.</p>
                 </div>
             </div>
-        </script>
+        </script>                      
         
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">

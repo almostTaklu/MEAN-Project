@@ -175,3 +175,26 @@ module.exports.commentsReadOne = async function(req, res) {
     }
 };
 
+// Post a reply to a comment
+module.exports.repliesCreate = async function(req, res) {
+    try {
+        const blog = await Blog.findById(req.params.blogid);
+        if (!blog) {
+            return res.status(404).send({message: "Blog not found"});
+        }
+        const comment = blog.comments.id(req.params.commentid);
+        if (!comment) {
+            return res.status(404).send({message: "Comment not found"});
+        }
+        comment.replies.push({
+            commentText: req.body.commentText,
+            author: req.body.author,
+            authorEmail: req.body.authorEmail,
+            createdOn: new Date()
+        });
+        await blog.save();
+        res.status(201).json(comment.replies[comment.replies.length - 1]);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+};

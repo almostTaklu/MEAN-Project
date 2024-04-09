@@ -24,5 +24,7 @@ router.post('/login', ctrlAuth.login);  // POST /api/login
 // Routes for comments
 router.post('/blogs/:blogid/comments', auth, ctrlBlog.commentsCreate);
 router.get('/blogs/:blogid/comments', ctrlBlog.commentsReadOne);
+router.post('/blogs/:blogid/comments/:commentid/replies', auth, ctrlBlog.repliesCreate);
+
 
 module.exports = router;

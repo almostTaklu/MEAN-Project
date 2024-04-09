@@ -107,6 +107,10 @@ app.service('BlogService', ['$http', 'authentication', function($http, authentic
     this.getComments = function(blogId) {
         return $http.get(apiBaseUrl + '/' + blogId + '/comments');
     };
+
+    this.addReply = function(blogId, commentId, reply) {
+        return $http.post(apiBaseUrl + '/' + blogId + '/comments/' + commentId + '/replies', reply, makeAuthHeader());
+    };
 }]);
 
 //Controllers
@@ -150,13 +154,10 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
     var vm = this;
     vm.blog = {};
     vm.newCommentText = '';
-
-    console.log("Loading ViewController with blog ID:", $stateParams.blogid);
+    vm.newReplyTexts = {};  // Object to hold replies for different comments
 
     BlogService.getBlog($stateParams.blogid).then(function(response) {
-        console.log("Fetched blog details:", response.data);
         vm.blog = response.data;
-        $scope.title = vm.blog.title;
     }, function(error) {
         console.error('Error fetching blog:', error);
     });
@@ -172,6 +173,25 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
             vm.newCommentText = ''; // Clear the textarea after posting
         }, function(error) {
             console.error('Error adding comment:', error);
+        });
+    };
+
+    // Add a reply to a specific comment
+    vm.addReply = function(commentId) {
+        var reply = {
+            commentText: vm.newReplyTexts[commentId],
+            author: authentication.currentUser().name,
+            authorEmail: authentication.currentUser().email
+        };
+        BlogService.addReply($stateParams.blogid, commentId, reply).then(function(response) {
+            // Find the comment by ID and add the reply
+            var comment = vm.blog.comments.find(c => c._id === commentId);
+            if(comment) {
+                comment.replies.push(response.data);
+            }
+            vm.newReplyTexts[commentId] = ''; // Clear the textarea after posting
+        }, function(error) {
+            console.error('Error adding reply:', error);
         });
     };
 

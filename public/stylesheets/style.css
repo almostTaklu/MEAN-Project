@@ -316,3 +316,262 @@ footer {
     margin-top: 0rem; /* Reduced top margin for close spacing to the title */
     margin-bottom: 1.5rem; /* Larger bottom margin to separate title from text */
 }
+
+/* Comments Section */
+/* Style for the blog view container */
+.blog-view-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style for the blog title */
+.blog-view-container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Style for the blog text */
+.blog-view-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+}
+
+/* Style for the comments title */
+.comments-title {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style for the comment list */
+.comment-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+/* Style for each comment item */
+.comment-item {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 5px solid #007bff;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.comment-item:hover {
+    transform: translateX(5px);
+    border-left-color: #0056b3;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+/* Style for the comment author */
+.comment-author-avatar {
+    font-size: 24px;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+/* Style for the comment date */
+.comment-date {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* Style for the comment text */
+.comment-text, .reply-text{
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* Style for the comment form */
+.comment-form {
+    margin-top: 2rem;
+}
+
+/* Style for the comment textarea */
+.comment-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    height: 100px;
+    font-size: 1rem;
+}
+
+/* Style for the post comment button */
+.comment-form button {
+    background-color: #365981;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.comment-form button:hover {
+    background-color: #2a456a;
+}
+
+/* Comment author details styling */
+.comment-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;  /* Adds some space below the author details */
+}
+
+.comment-author-avatar {
+    font-size: 24px; /* Adjusts the size of the icon */
+    color: #007bff;  /* Gives the icon a primary color, match this with your theme */
+    margin-right: 10px; /* Adds space between the icon and the author name */
+}
+
+.comment-author {
+    font-weight: bold; /* Makes the author name bold */
+    color: #365981;
+    margin-right: 5px; /* Space between author name and date */
+}
+
+.comment-date {
+    font-size: 0.8rem; /* Smaller font size for the date */
+    color: #666; /* Grey color for the date to make it less prominent than the author name */
+}
+
+.comment-list {
+    list-style-type: none; /* Removes bullet points from the list */
+    padding-left: 0; /* Removes padding from the list */
+}
+
+.comment-item {
+    border-bottom: 1px solid #ccc; /* Adds a subtle line between comments */
+    padding-bottom: 10px; /* Space at the bottom of each comment */
+    margin-bottom: 10px; /* Space between comment blocks */
+}
+
+.comment-text {
+    margin-left: 34px; /* Indents the comment text to align under the author name */
+}
+
+/* Enhanced comment styling */
+.comment-reply-icon {
+    cursor: pointer;
+    margin-left: 10px; /* Space from the date */
+    color: #365981; /* Match the color with the theme */
+}
+
+/* Style for reply form that appears when the reply icon is clicked */
+.comment-item div[ng-show] {
+    margin-top: 10px;
+}
+
+.comment-item textarea {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-item button {
+    background-color: #365981;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Ensures the button is on a new line */
+}
+
+.comment-item button:hover {
+    background-color: #2a456a;
+}
+
+/* Replies styling */
+.reply-list {
+    list-style-type: none; /* Removes bullet points */
+    padding-left: 20px; /* Indents replies to distinguish from main comments */
+    margin-top: 10px; /* Space above the replies list */
+}
+
+.reply-item {
+    padding-left: 20px;
+    background: #f9f9f9;
+    margin-top: 5px;
+    border-left: 3px solid #007bff;
+    font-style: italic;
+    color: #555;
+    padding-left: 10px;
+}
+
+/* Styling for the reply link */
+.reply-link {
+    color: #007bff;  /* Primary color for interactive elements */
+    cursor: pointer; /* Indicates an actionable item */
+    display: inline-block; /* Ensures proper alignment */
+    margin-left: 15px; /* Space from the comment text */
+    font-size: 0.9rem; /* Smaller font size for subtext */
+    text-decoration: none; /* Removes underline by default */
+}
+
+.reply-link:hover {
+    text-decoration: underline; /* Underline on hover to indicate interactivity */
+    color: #0056b3; /* Darker blue on hover for visual feedback */
+}
+
+/* Maintain visual coherence for icons within replies */
+.reply-icon {
+    margin-right: 5px; /* Space between the icon and the text */
+}
+
+/* Reply form adjustments for a clean layout */
+.reply-form {
+    margin-top: 10px; /* Space from the reply link */
+    padding-left: 20px; /* Indentation to align under the reply link */
+    border-left: 2px solid #eee; /* Visual cue for nested elements */
+}
+
+/* Textarea styling within the reply form */
+.reply-textarea {
+    width: 100%;
+    height: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+/* Button styling adjustments for replies */
+.btn-secondary {
+    padding: 6px 12px; /* More compact padding */
+    font-size: 0.8rem; /* Smaller text for secondary actions */
+}
+
+/* Specific styles for reply items to enhance readability */
+.reply-item {
+    margin-top: 5px; /* Space between replies */
+    padding-left: 20px; /* Indentation to distinguish replies from original comments */
+    font-size: 0.9rem; /* Slightly smaller font size for replies */
+}
+
+.reply-date {
+    margin-left: 10px; /* Space after the author name for the date */
+    color: #888; /* Subdued color for secondary information */
+}

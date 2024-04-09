@@ -7,43 +7,57 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             url: '/',
             templateUrl: '/home.html',
             controller: 'HomeController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Home' }
         })
         .state('blogList', {
             url: '/blogList',
             templateUrl: '/blogList.html',
             controller: 'ListController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Blog List' }
         })
         .state('blogAdd', {
             url: '/blogAdd',
             templateUrl: '/blogAdd.html',
             controller: 'AddController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Add New Blog' }
         })
         .state('blogEdit', {
             url: '/blogEdit/:blogid',
             templateUrl: '/blogEdit.html',
             controller: 'EditController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Edit Blog' }
         })
         .state('blogDelete', {
             url: '/blogDelete/:blogid',
             templateUrl: '/blogDelete.html',
             controller: 'DeleteController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Delete Blog' }
         })
         .state('register', {
             url: '/register',
             templateUrl: '/register.html',
             controller: 'RegisterController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Register' }
         })
         .state('login', {
             url: '/login',
             templateUrl: '/login.html',
             controller: 'LoginController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: { title: 'Login' }
+        })
+        .state('blogView', {
+            url: '/blogView/:blogid',
+            templateUrl: '/blogView.html',
+            controller: 'ViewController',
+            controllerAs: 'vm',
+            data: { title: 'View Blog' }
         });
 
     // Default fallback for unmatched urls
@@ -85,6 +99,14 @@ app.service('BlogService', ['$http', 'authentication', function($http, authentic
     this.deleteBlog = function(blogId) {
         return $http.delete(apiBaseUrl + '/' + blogId, makeAuthHeader() );
     };
+
+    this.addComment = function(blogId, comment) {
+        return $http.post(apiBaseUrl + '/' + blogId + '/comments', comment, makeAuthHeader() );
+    };
+
+    this.getComments = function(blogId) {
+        return $http.get(apiBaseUrl + '/' + blogId + '/comments');
+    };
 }]);
 
 //Controllers
@@ -122,6 +144,42 @@ app.controller('ListController', ['BlogService','authentication',
             vm.message = 'Error fetching blog ';
         });
 }]);
+
+// Controller for viewing a blog
+app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication', function ViewController($stateParams, BlogService, authentication) {
+    var vm = this;
+    vm.blog = {};
+    vm.newCommentText = '';
+
+    console.log("Loading ViewController with blog ID:", $stateParams.blogid);
+
+    BlogService.getBlog($stateParams.blogid).then(function(response) {
+        console.log("Fetched blog details:", response.data);
+        vm.blog = response.data;
+        $scope.title = vm.blog.title;
+    }, function(error) {
+        console.error('Error fetching blog:', error);
+    });
+
+    vm.addComment = function() {
+        var comment = {
+            commentText: vm.newCommentText,
+            author: authentication.currentUser().name,
+            authorEmail: authentication.currentUser().email
+        };
+        BlogService.addComment($stateParams.blogid, comment).then(function(response) {
+            vm.blog.comments.push(response.data);
+            vm.newCommentText = ''; // Clear the textarea after posting
+        }, function(error) {
+            console.error('Error adding comment:', error);
+        });
+    };
+
+    vm.isLoggedIn = function() {
+        return authentication.isLoggedIn();
+    };
+}]);
+
 
 // Controller for adding blogs
 app.controller('AddController', ['$location', 'BlogService', 'authentication', 

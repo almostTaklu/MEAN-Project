@@ -21,4 +21,8 @@ router.delete('/blogs/:blogid', auth, ctrlBlog.blogDeleteOne);    // DELETE /api
 router.post('/register', ctrlAuth.register); // POST /api/register
 router.post('/login', ctrlAuth.login);  // POST /api/login
 
+// Routes for comments
+router.post('/blogs/:blogid/comments', auth, ctrlBlog.commentsCreate);
+router.get('/blogs/:blogid/comments', ctrlBlog.commentsReadOne);
+
 module.exports = router;

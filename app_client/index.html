@@ -3,18 +3,31 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ganga Acharya Blog Site</title>
     <base href="/">
 
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+
+    <!-- Angular and other library scripts -->
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-ui-router.js"></script>
-    <link rel='stylesheets' href='/bootstrap/css/bootstrap.min.css'>
+    <script src="lib/angular-route.min.js"></script>
+    
+    <!-- Your AngularJS App Script -->
+    <script src="bloggerApp.js"></script>
+
+    <!-- Dynamic title with ng-bind -->
+    <title> Ganga's Blogsite </title>
+    
 
 
 </head>
 
 <body>
-    <div ng-include="'partials/head.html'"></div>
+    <!-- <div ng-include="'partials/head.html    '"></div> -->
     <div ng-controller="NavigationController">
         <navigation></navigation>
     </div>
@@ -33,51 +46,78 @@
             </div>
         </script>
 
-
-    <!-- blogList.html -->
     <script type="text/ng-template" id="/blogList.html">
-    <div class="container py-5">
-        <h1 class="text-center mb-5">{{ vm.title }}</h1>
-        <div class="row g-4">
-            <div ng-repeat="blog in vm.blogs" class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between mb-3">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-solid fa-circle-user user-avatar"></i>
-                                <div class="ms-2">
-                                    <span class="user-name">{{ blog.author }}</span>
+        <div class="container py-5">
+            <h1 class="text-center mb-5">{{ vm.title }}</h1>
+            <div class="row g-4">
+                <div ng-repeat="blog in vm.blogs" class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-solid fa-circle-user user-avatar"></i>
+                                    <div class="ms-2">
+                                        <span class="user-name">{{ blog.author }}</span>
+                                    </div>
+                                </div>
+                                <div class="post-date d-flex align-items-center">
+                                    <i class="fas fa-solid fa-calendar-days"></i>
+                                    <span class="ms-1">{{ blog.createdOn | date:'mediumDate' }}</span>
                                 </div>
                             </div>
-                            <div class="post-date d-flex align-items-center">
-                                <i class="fas fa-solid fa-calendar-days"></i>
-                                <span class="ms-1">{{ blog.createdOn | date:'mediumDate' }}</span>
+                            <!-- Make blog title clickable -->
+                            <h4 class="card-title mt-2 mb-3">
+                                <a ui-sref="blogView({blogid: blog._id})" class="text-decoration-none">
+                                    {{ blog.blogTitle }}
+                                </a>
+                            </h4>
+                            <p class="card-text flex-grow-1">{{ blog.blogText | limitTo: 100 }}...</p>
+                            <div class="mt-auto">
+                                <a ng-show="vm.isLoggedIn() && vm.currentUser().email === blog.authorEmail"
+                                   class="icon-link" title="Edit"
+                                   ui-sref="blogEdit({blogid: blog._id})">
+                                    <i class="fas fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a ng-show="vm.isLoggedIn() && vm.currentUser().email === blog.authorEmail"
+                                   class="icon-link delete" title="Delete"
+                                   ui-sref="blogDelete({blogid: blog._id})">
+                                    <i class="fas fa-solid fa-trash"></i>
+                                </a>
                             </div>
-                        </div>
-                        <h4 class="card-title mt-2 mb-3">{{ blog.blogTitle }}</h4>
-                        <p class="card-text flex-grow-1">{{ blog.blogText }}</p>
-                        <div class="mt-auto icon-actions">
-                            <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link" title="Edit" ui-sref="blogEdit({blogid: blog._id})">
-                                <i class="fas fa-solid fa-pen-to-square"></i>
-                            <!-- <a ui-sref="blogEdit({blogid: blog._id})" class="icon-link" title="Edit" ng-show="vm.isLoggedIn()">
-                                <i class="fas fa-edit"></i>
-                            </a> -->
-                            <a ng-show="vm.isLoggedIn() && vm.currentUser().email ===blog.authorEmail" class = "icon-link delete" title="Delete" ui-sref="blogDelete({blogid: blog._id})">
-                                <i class="fas fa-solid fa-trash"></i>
-                            <!-- <a ui-sref="blogDelete({blogid: blog._id})" class="icon-link delete" title="Delete" ng-show="vm.isLoggedIn()">
-                                <i class="fas fa-trash-alt"></i>
-                            </a> -->
                         </div>
                     </div>
                 </div>
-            </div>
-            <div ng-if="!vm.blogs.length" class="col-12 text-center">
-                <p class="mt-5">There are no posts yet. <a ui-sref="blogAdd" class="text-decoration-none">Click here</a> to add a new post.</p>
+                <div ng-if="!vm.blogs.length" class="col-12 text-center">
+                    <p class="mt-5">There are no posts yet. <a ui-sref="blogAdd" class="text-decoration-none">Click here</a> to add a new post.</p>
+                </div>
             </div>
         </div>
-    </div>
-    </script>
-
+        </script>
+    
+        <script type="text/ng-template" id="/blogView.html">
+            <div class="container mt-5" ng-controller="ViewController as vm">
+                <h1>{{ vm.blog.blogTitle }}</h1>
+                <p>{{ vm.blog.blogText }}</p>
+                <h3>Comments:</h3>
+                <ul>
+                    <li ng-repeat="comment in vm.blog.comments">
+                        <strong>{{ comment.author }}</strong> on {{ comment.createdOn | date:'mediumDate' }}:
+                        <p>{{ comment.commentText }}</p>
+                    </li>
+                </ul>
+                <!-- Conditionally display the comment form -->
+                <div ng-if="vm.isLoggedIn()">
+                    <form ng-submit="vm.addComment()">
+                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."></textarea>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+                <div ng-if="!vm.isLoggedIn()">
+                    <p>To post comments, please <a ui-sref="login">login</a>.</p>
+                </div>
+            </div>
+        </script>
+        
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">
     <div class="container edit-blog-container">
@@ -203,7 +243,6 @@
             </div>
     </script>
 
-    <script src="bloggerApp.js"></script>
     <script src="common/nav/navigation.js"></script>
     <script src="common/auth/authentication.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

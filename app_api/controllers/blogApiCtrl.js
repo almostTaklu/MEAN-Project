@@ -128,3 +128,50 @@ module.exports.blogList = async function (req, res) {
         res.status(500).json({ "message": "Error listing blogs", error: err });
     }
 };
+
+// Post a comment
+module.exports.commentsCreate = async function(req, res) {
+    const blogId = req.params.blogid;
+    console.log("Adding comment to blog:", blogId);
+
+    if (!req.payload._id) {
+        res.status(401).json({ "message": "UnauthorizedError: private profile" });
+        return;
+    }
+
+    try {
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            sendJSONresponse(res, 404, { "message": "Blog not found" });
+            return;
+        }
+        blog.comments.push({
+            commentText: req.body.commentText,
+            author: req.payload.name,
+            authorEmail: req.payload.email
+        });
+
+        // Using Promise-based save
+        await blog.save();
+        sendJSONresponse(res, 201, blog.comments[blog.comments.length - 1]);
+    } catch (err) {
+        sendJSONresponse(res, 400, err);
+    }
+};
+
+// Get comments for a blog
+module.exports.commentsReadOne = async function(req, res) {
+    console.log('Getting comments from blog with ID:', req.params.blogid);
+
+    try {
+        const blog = await Blog.findById(req.params.blogid).select('comments');
+        if (!blog) {
+            sendJSONresponse(res, 404, { "message": "Blog not found" });
+            return;
+        }
+        sendJSONresponse(res, 200, blog.comments);
+    } catch (err) {
+        sendJSONresponse(res, 400, err);
+    }
+};
+

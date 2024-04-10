@@ -26,5 +26,8 @@ router.post('/blogs/:blogid/comments', auth, ctrlBlog.commentsCreate);
 router.get('/blogs/:blogid/comments', ctrlBlog.commentsReadOne);
 router.post('/blogs/:blogid/comments/:commentid/replies', auth, ctrlBlog.repliesCreate);
 
+router.post('/blogs/:blogid/comments/:commentid/like', auth, ctrlBlog.likeComment);
+router.post('/blogs/:blogid/comments/:commentid/dislike', auth, ctrlBlog.dislikeComment);
+
 
 module.exports = router;

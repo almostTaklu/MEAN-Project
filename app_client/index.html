@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Angular and other library scripts -->
     <script src="lib/angular.min.js"></script>
@@ -92,19 +93,28 @@
             <div class="container mt-5 blog-view-container" ng-controller="ViewController as vm">
                 <h1>{{ vm.blog.blogTitle }}</h1>
                 <p>{{ vm.blog.blogText }}</p>
-                <h3 class="comments-title">Comments:</h3>
+                <h3 class="comments-title">Comments</h3>
                 <ul class="comment-list">
                     <li class="comment-item" ng-repeat="comment in vm.blog.comments">
                         <div class="comment-author-info">
-                            <i class="fas fa-user-circle comment-author-avatar"></i>
+                            <i class="material-icons comment-author-avatar">account_circle</i>
                             <strong class="comment-author">{{ comment.author }}</strong>
                             <span class="comment-date">{{ comment.createdOn | date:'mediumDate' }}</span>
                         </div>
                         <p class="comment-text">{{ comment.commentText }}</p>
-                        <!-- Enhanced reply link -->
-                        <span class="reply-link" ng-click="comment.showReply = !comment.showReply">
-                            <i class="fas fa-reply reply-icon"></i> Reply
-                        </span>
+                        <div class="comment-actions flex-actions">
+                            <button ng-click="vm.likeComment(comment)" ng-disabled="vm.hasLiked(comment)">
+                                <i class="material-icons">thumb_up</i>
+                                <span>{{ comment.likes }}</span>
+                            </button>
+                            <button ng-click="vm.dislikeComment(comment)" ng-disabled="vm.hasDisliked(comment)">
+                                <i class="material-icons">thumb_down</i>
+                                <span>{{ comment.dislikes }}</span>
+                            </button>
+                            <span class="reply-link" ng-click="comment.showReply = !comment.showReply">
+                                Reply
+                            </span>
+                        </div>
                         <div ng-show="comment.showReply" class="reply-form">
                             <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea"></textarea>
                             <button ng-click="vm.addReply(comment._id)" class="btn btn-secondary">Post Reply</button>
@@ -119,15 +129,19 @@
                 </ul>
                 <div ng-if="vm.isLoggedIn()" class="comment-form">
                     <form ng-submit="vm.addComment()">
-                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."></textarea>
-                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."
+                                  ng-focus="vm.showButtons = true" ng-blur="vm.checkBlur()"></textarea>
+                        <div ng-show="vm.showButtons">
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                            <button type="button" class="btn btn-default" ng-click="vm.cancelComment()">Cancel</button>
+                        </div>
                     </form>
                 </div>
                 <div ng-if="!vm.isLoggedIn()">
                     <p>To post comments, please <a ui-sref="login">login</a>.</p>
                 </div>
             </div>
-        </script>                      
+        </script>                                      
         
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">

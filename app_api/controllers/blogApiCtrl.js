@@ -198,3 +198,67 @@ module.exports.repliesCreate = async function(req, res) {
         res.status(400).send(err);
     }
 };
+
+// Function to handle a like or dislike action
+const handleReaction = async function (req, res, reactionType) {
+    const blogId = req.params.blogid;
+    const commentId = req.params.commentid;
+    const userId = req.payload._id; // Make sure this is the correct way to get your user's ID
+
+    try {
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return sendJSONresponse(res, 404, { "message": "Blog not found" });
+        }
+
+        const comment = blog.comments.id(commentId);
+        if (!comment) {
+            return sendJSONresponse(res, 404, { "message": "Comment not found" });
+        }
+
+        // Find if the user has already reacted
+        const reactionIndex = comment.userReactions.findIndex(reaction => reaction.userId.equals(userId));
+
+        // Reaction logic
+        if (reactionIndex !== -1) {
+            // User has already reacted
+            if (comment.userReactions[reactionIndex].reaction === reactionType) {
+                // Same reaction - toggle off
+                comment.userReactions.splice(reactionIndex, 1);
+                reactionType === 'like' ? comment.likes-- : comment.dislikes--;
+            } else {
+                // Different reaction - switch from like to dislike or vice versa
+                comment.userReactions[reactionIndex].reaction = reactionType;
+                if (reactionType === 'like') {
+                    comment.likes++;
+                    comment.dislikes--;
+                } else {
+                    comment.dislikes++;
+                    comment.likes--;
+                }
+            }
+        } else {
+            // New reaction - add it
+            comment.userReactions.push({ userId: userId, reaction: reactionType });
+            reactionType === 'like' ? comment.likes++ : comment.dislikes++;
+        }
+
+        await blog.save();
+        sendJSONresponse(res, 200, {
+            likes: comment.likes,
+            dislikes: comment.dislikes,
+            userReactions: comment.userReactions
+        });
+    } catch (err) {
+        sendJSONresponse(res, 400, err);
+    }
+};
+
+module.exports.likeComment = function (req, res) {
+    handleReaction(req, res, 'like');
+};
+
+module.exports.dislikeComment = function (req, res) {
+    handleReaction(req, res, 'dislike');
+};
+

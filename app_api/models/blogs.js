@@ -5,6 +5,19 @@ var getNewDate = function(){
     return moment().tz("America/New_York").format("DD MMMM YYYY");
 };
 
+var userReactionSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'User ID is required',
+        ref: 'User' // This is a reference to the User model
+    },
+    reaction: {
+        type: String,
+        required: 'Reaction is required',
+        enum: ['like', 'dislike']
+    }
+}, {_id: false});
+
 var replySchema = new mongoose.Schema({
     commentText: {
         type: String,
@@ -21,7 +34,16 @@ var replySchema = new mongoose.Schema({
     createdOn: {
         type: Date,
         default: Date.now
-    }
+    },
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
+    },
+    userReactions: [userReactionSchema]
 });
 
 var commentSchema = new mongoose.Schema({
@@ -41,7 +63,16 @@ var commentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    replies: [replySchema]  // Nested replies
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
+    },
+    userReactions: [userReactionSchema],
+    replies: [replySchema] // Nested replies
 });
 
 var blogSchema = new mongoose.Schema({

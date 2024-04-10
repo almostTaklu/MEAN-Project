@@ -45,7 +45,7 @@
 
     <script type="text/ng-template" id="/blogList.html">
         <div class="container py-5">
-            <h1 class="text-center mb-5">{{ vm.title }}</h1>
+            <h1 class="page-header title-with-line">{{ vm.title }}</h1>
             <div class="row g-4">
                 <div ng-repeat="blog in vm.blogs" class="col-lg-4 col-md-6">
                     <div class="card h-100 shadow-sm">
@@ -116,8 +116,9 @@
                             </span>
                         </div>
                         <div ng-show="comment.showReply" class="reply-form">
-                            <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea"></textarea>
+                            <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea" required></textarea>
                             <button ng-click="vm.addReply(comment._id)" class="btn btn-secondary">Post Reply</button>
+                            <button ng-click="vm.cancelReply(comment._id)" class="btn btn-secondary">Cancel</button>
                         </div>
                         <ul class="reply-list">
                             <li class="reply-item" ng-repeat="reply in comment.replies">
@@ -129,8 +130,8 @@
                 </ul>
                 <div ng-if="vm.isLoggedIn()" class="comment-form">
                     <form ng-submit="vm.addComment()">
-                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."
-                                  ng-focus="vm.showButtons = true" ng-blur="vm.checkBlur()"></textarea>
+                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..." 
+                                            ng-focus="vm.showButtons = true" ng-blur="vm.checkBlur()" required></textarea>
                         <div ng-show="vm.showButtons">
                             <button type="submit" class="btn btn-primary">Post Comment</button>
                             <button type="button" class="btn btn-default" ng-click="vm.cancelComment()">Cancel</button>
@@ -145,30 +146,30 @@
         
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">
-    <div class="container edit-blog-container">
-        <h1 class="edit-blog-header">Add Blog Post</h1>
-        <form ng-submit="vm.submitBlog()" ng-controller="AddController as vm" method = "POST" class="edit-form">
-            <div class="form-group">
-                <label for="blogTitle">Title:</label>
-                <input type="text" class="form-control" id="blogTitle" ng-model="vm.blog.blogTitle" required>
+        <div class="container mt-5">
+            <h1 class="page-header title-with-line">Add Blog Post</h1>
+            <div class="form-container">
+                <form ng-submit="vm.submitBlog()" ng-controller="AddController as vm">
+                    <div class="form-group">
+                        <label for="blogTitle">Title:</label>
+                        <input type="text" class="form-control" id="blogTitle" ng-model="vm.blog.blogTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogText">Body:</label>
+                        <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Post</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="blogText">Body:</label>
-                <textarea class="form-control" id="blogText" ng-model="vm.blog.blogText" rows="6" required></textarea>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Add Post</button>
-            </div>
-        </form>
-    </div>
+        </div>
     </script>
 
     <!-- blogEdit.html -->
     <script type="text/ng-template" id="/blogEdit.html">
-        <div class="container mt-5" ng-controller="EditController as vm">
-            <div class="edit-blog-container">
-                <h1 class="edit-blog-header">Edit Blog</h1>
-                <form ng-submit="vm.editBlog()" class="edit-form">
+        <div class="container mt-5">
+            <h1 class="page-header title-with-line">Edit Blog</h1>
+            <div class="form-container">
+                <form ng-submit="vm.editBlog()" ng-controller="EditController as vm">
                     <div class="form-group">
                         <label for="blogTitle">Blog Title</label>
                         <input class="form-control" id="title" ng-model="vm.blog.blogTitle">
@@ -185,32 +186,27 @@
 
     <!-- blogDelete.html -->
     <script type="text/ng-template" id="/blogDelete.html">
-            <div class="container mt-5">
-                <div class="form-container">
-                    <h1 class="form-header">Delete Blog</h1>
+        <div class="container mt-5">
+            <h1 class="page-header title-with-line">Delete Blog</h1>
+            <div class="form-container">
+                <form ng-submit="vm.deleteBlog()" ng-controller="DeleteController as vm" method="POST">
                     <div class="delete-warning">
                         <p>Are you sure you want to delete this blog? This action cannot be undone.</p>
                     </div>
-                    <form ng-submit="vm.deleteBlog()" class="form-body" ng-controller="DeleteController" method="POST">
-                        <div role = "alert" ng-show="vm.formError" class="alert alert-danger">
-                            {{ vm.formError }}
-                        </div>
-                        <div class="form-group">
-                            <label for="blogTitle">Blog Title</label>
-                            <input readonly class="form-control" id="title" ng-model="vm.blog.blogTitle">
-                        </div>
-                        <div class="form-group">
-                            <label for="blogText">Content</label>
-                            <textarea readonly class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                            <a ui-sref="blogList" class="btn btn-secondary">Cancel</a>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <input readonly class="form-control" id="title" ng-model="vm.blog.blogTitle">
+                    </div>
+                    <div class="form-group">
+                        <textarea readonly class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a ui-sref="blogList" class="btn btn-secondary">Cancel</a>
+                </form>
             </div>
-        </script>
+        </div>
+    </script>
+    
+    
 
     <!-- Register -->
     <script type="text/ng-template" id="/register.html">

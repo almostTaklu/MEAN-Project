@@ -5,6 +5,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.content-container {
+    padding: 20px;  /* Consistent padding */
+    margin: auto;   /* Automatically center the container */
+    max-width: 1300px; /* Consistent maximum width */
+    background-color: #fff; /* Consistent background color */
+    border-radius: 8px; /* Rounded corners for aesthetics */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    margin-top: 3rem; /* Consistent top margin */
+}
+
 a{
     color:#365981;
     text-decoration: none;
@@ -54,7 +65,7 @@ a:hover {
 
 .card {
     width: 100%; /* Use 100% of the column width */
-    max-width: 380px; /* Slightly larger card */
+    max-width: 400px; /* Slightly larger card */
     margin: 0 auto 20px; /* Centered with margin at the bottom */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -105,7 +116,6 @@ a:hover {
     font-size: 1rem;
 }
 
-
 /* Title spacing */
 .card .card-title {
     display: block;
@@ -115,7 +125,6 @@ a:hover {
     margin-top: 20px !important;
     margin-bottom: 1rem !important;
 }
-
 
 /* Text and icon section */
 .card .card-text {
@@ -172,14 +181,80 @@ a:hover {
     cursor: pointer; 
 }
 
-.edit-blog-container, .form-container, .jumbotron {
-    max-width: auto;
-    margin: 40px auto;
+/* Title Styles for Uniformity */
+.page-header, .comments-title, .form-header {
+    margin-left: 10px;     /* Ensures all titles start at the same point */
+    font-size: 28px;    /* Consistent font size */
+    font-weight: bold;  /* Makes the titles bold */
+    color: #000;     /* Uniform color for titles */
+    padding-bottom: 24px; /* Space below the title */
+    display: block;    /* Ensures the title is a block element */
+}
+
+/* Ensure the Add, Edit, and Delete pages titles are aligned correctly */
+.form-header {
+    padding-left: 0;   /* No padding to the left to align with the container's start */
+    margin-top: 20px;  /* Additional top margin for spacing */
+}
+
+/* Adjustments for titles to be outside the form boxes */
+.form-container {
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
-    color: #333;
     background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ddd; /* Adds a subtle border */
+}
+
+/* Utility classes for margins and padding */
+.mt-5 { margin-top: 3rem; }
+.text-center { text-align: center; }
+
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Button Styles */
+.btn-primary, .btn-danger, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #365981;
+    color: white;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
+    background-color: #2a456a;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
 }
 
 .jumbotron .btn:hover, .jumbotron .btn:focus, .jumbotron .btn-primary:hover {
@@ -187,50 +262,10 @@ a:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Specific Styles for Edit Page */
-.edit-blog-container {
-    max-width: 800px;
-    margin: 40px auto; /* Increase top and bottom margin */
-    padding: 40px; /* Increase padding for more space inside */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* More pronounced shadow */
-    border-radius: 8px; /* Ensure there's a border-radius */
-    color: #333;
-    background-color: #fff; /* Background color */
-    border: 1px solid #ddd; /* Optional: adds a subtle border for depth */
-}
-
-.edit-blog-header {
-    margin-bottom: 30px;
-    text-align: center;
-}
-.edit-form .form-group {
-    margin-bottom: 25px;
-}
-.edit-form label {
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: block;
-}
 .edit-form button[type="submit"] {
     width: 100%;
     padding: 10px;
     font-size: 18px;
-}
-
-/* Common Styles for Edit and Delete Pages */
-.form-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    color: #333;
-    background-color: #fff;
-}
-
-.form-header {
-    margin-bottom: 30px;
-    text-align: center;
 }
 
 .form-body .form-group {
@@ -324,15 +359,6 @@ footer {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.blog-view-container h1, .comments-title {
-    color: #333;
-}
-
-.blog-view-container p {
-    color: #666;
-    word-wrap: break-word;
 }
 
 .blog-view-container h1, .comments-title {
@@ -449,8 +475,8 @@ footer {
     background-color: #365981;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 7px 14px;
+    border-radius: 40px;
     cursor: pointer;
     font-size: 0.9rem;
 }
@@ -501,8 +527,8 @@ footer {
     background-color: #365981;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 5px 8px;
+    border-radius: 60px;
     cursor: pointer;
     font-size: 0.9rem;
 }
@@ -588,4 +614,29 @@ footer {
     background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
     color: #0056b3; /* Darker blue on hover for visual feedback */
     text-decoration: none; /* Underline to indicate it is clickable */
+}
+
+
+.title-with-line {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 30px; /* Adjust font size as needed */
+}
+
+.title-with-line:after {
+    content: '';
+    flex-grow: 1;
+    height: 2.5px; /* Line thickness */
+    background-color: #000; /* Line color */
+    margin-left: 10px; /* Space between text and line */
+}
+
+/* Utility Classes */
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.text-center {
+    text-align: center;
 }

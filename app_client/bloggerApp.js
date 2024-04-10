@@ -174,6 +174,15 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
         console.error('Error fetching blog:', error);
     });
 
+    // Function to cancel the reply
+    vm.cancelReply = function(commentId) {
+        vm.newReplyTexts[commentId] = '';  // Clear the textarea
+        var commentIndex = vm.blog.comments.findIndex(c => c._id === commentId);
+        if(commentIndex >= 0) {
+            vm.blog.comments[commentIndex].showReply = false;  // Optionally hide the reply form
+        }
+    };
+
     vm.addComment = function () {
         var comment = {
             commentText: vm.newCommentText,
@@ -187,6 +196,17 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
         }, function (error) {
             console.error('Error adding comment:', error);
         });
+    };
+
+    vm.cancelComment = function () {
+        vm.newCommentText = '';
+        vm.showButtons = false;
+    };
+
+    vm.checkBlur = function () {
+        if(!vm.newCommentText.trim()) {
+            vm.showButtons = false;
+        }
     };
 
     // Add a reply to a specific comment
@@ -257,8 +277,6 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
                 console.error('Error processing dislike:', error);
             });
     };
-
-    // Inside ViewController
 
     vm.hasLiked = function (comment) {
         var userId = authentication.currentUser()._id;

@@ -203,7 +203,7 @@ module.exports.repliesCreate = async function(req, res) {
 const handleReaction = async function (req, res, reactionType) {
     const blogId = req.params.blogid;
     const commentId = req.params.commentid;
-    const userId = req.payload._id; // Make sure this is the correct way to get your user's ID
+    const userId = req.payload._id;
 
     try {
         const blog = await Blog.findById(blogId);

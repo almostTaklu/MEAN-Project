@@ -6,16 +6,6 @@ body {
     padding: 0;
 }
 
-.content-container {
-    padding: 20px;  /* Consistent padding */
-    margin: auto;   /* Automatically center the container */
-    max-width: 1300px; /* Consistent maximum width */
-    background-color: #fff; /* Consistent background color */
-    border-radius: 8px; /* Rounded corners for aesthetics */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
-    margin-top: 3rem; /* Consistent top margin */
-}
-
 a{
     color:#365981;
     text-decoration: none;
@@ -193,8 +183,10 @@ a:hover {
 
 /* Ensure the Add, Edit, and Delete pages titles are aligned correctly */
 .form-header {
-    padding-left: 0;   /* No padding to the left to align with the container's start */
-    margin-top: 20px;  /* Additional top margin for spacing */
+    font-size: 1.75rem;
+    color: #365981;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 /* Adjustments for titles to be outside the form boxes */
@@ -217,6 +209,8 @@ a:hover {
 }
 
 .form-group label {
+    display: block;
+    color: #333;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
@@ -639,4 +633,89 @@ footer {
 
 .text-center {
     text-align: center;
+}
+
+
+/* Login/Registeration page */
+/* Specific styles for authentication forms */
+.auth-form-container .form-container {
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin: 2rem auto;
+}
+
+.auth-form-container .form-header {
+    font-size: 1.75rem;
+    color: #365981;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-form-container .form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form-container .form-group input,
+.auth-form-container .form-group textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s;
+}
+
+.auth-form-container .form-group input:focus,
+.auth-form-container .form-group textarea:focus {
+    border-color: #365981;
+    background-color: #fff;
+    outline: none;
+}
+
+.auth-form-container .form-actions {
+    margin-top: 1.5rem;
+}
+
+.auth-form-container .btn-primary {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    background-color: #365981;
+    border-radius: 4px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.auth-form-container .btn-primary:hover {
+    background-color: #2a456a;
+}
+
+.auth-form-container p.text-center {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.auth-form-container p.text-center a {
+    color: #365981;
+    font-weight: bold;
+}
+
+/* Enhance button hover effects */
+.auth-form-container .btn-primary:hover,
+.auth-form-container .btn-primary:focus {
+    background-color: #2a456a;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+
+.auth-form-container .alert {
+    margin-top: 1rem;
 }

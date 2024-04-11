@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var moment = require('moment-timezone');
 
 var getNewDate = function(){
-    return moment().tz("America/New_York").format("DD MMMM YYYY");
+    return moment().tz("America/New_York").format("DD MMM YYYY");
 };
 
 var userReactionSchema = new mongoose.Schema({
@@ -21,15 +21,15 @@ var userReactionSchema = new mongoose.Schema({
 var replySchema = new mongoose.Schema({
     commentText: {
         type: String,
-        required: 'Please enter your reply',
+        required: true
     },
     author: {
         type: String,
-        required: 'Author is required',
+        required: true
     },
     authorEmail: {
         type: String,
-        required: 'Author email is required',
+        required: true
     },
     createdOn: {
         type: Date,
@@ -49,15 +49,15 @@ var replySchema = new mongoose.Schema({
 var commentSchema = new mongoose.Schema({
     commentText: {
         type: String,
-        required: 'Comment text is required',
+        required: true
     },
     author: {
         type: String,
-        required: 'Author is required',
+        required: true
     },
     authorEmail: {
         type: String,
-        required: 'Author email is required',
+        required: true
     },
     createdOn: {
         type: Date,

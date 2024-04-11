@@ -37,13 +37,13 @@
                     <h1 class="display-4">{{ vm.title }}</h1>
                     <p class="lead">{{ vm.message }}</p>
                     <hr class="my-4">
-                    <p>Click below to view/edit/delete blog posts</p>
+                    <p> Click below to see the list of blogs or to add one. </p>
                     <a class="btn btn-primary btn-lg" ui-sref="blogList" role="button">View Blogs</a>
                 </div>
             </div>
         </script>
 
-        <script type="text/ng-template" id="/blogList.html">
+    <script type="text/ng-template" id="/blogList.html">
             <div class="container py-5">
                 <h1 class="page-header title-with-line">{{ vm.title }}</h1>
                 <div class="row g-4">
@@ -80,7 +80,7 @@
             </div>
         </script>
 
-        <script type="text/ng-template" id="/blogView.html">
+    <script type="text/ng-template" id="/blogView.html">
             <div class="container mt-5 blog-view-container" ng-controller="ViewController as vm">
                 <div class="blog-header">
                     <h1 class="blog-title">{{ vm.blog.blogTitle }}</h1>
@@ -127,8 +127,8 @@
                 </ul>
                 <div ng-if="vm.isLoggedIn()" class="comment-form">
                     <form ng-submit="vm.addComment()">
-                        <textarea ng-model="vm.newCommentText" required placeholder="Write a comment..."
-                                  ng-focus="vm.showButtons = true" ng-blur="vm.checkBlur()" required></textarea>
+                        <textarea ng-model="vm.newCommentText" placeholder="Write a comment..."
+                                ng-focus="vm.showButtons = true" ng-blur="vm.checkBlur()" required minlength="1"></textarea>
                         <div ng-show="vm.showButtons">
                             <button type="submit" class="btn btn-primary btn-comment">Comment</button>
                             <button type="button" class="btn btn-primary-outline btn-cancel" ng-click="vm.cancelComment()">Cancel</button>
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </script>
-        
+
     <!-- blogAdd.html -->
     <script type="text/ng-template" id="/blogAdd.html">
         <div class="container mt-5">
@@ -203,8 +203,6 @@
             </div>
         </div>
     </script>
-    
-    
 
     <!-- Register -->
     <script type="text/ng-template" id="/register.html">
@@ -235,7 +233,6 @@
             </div>
         </div>
     </script>
-    
 
     <!-- login page -->
     <script type="text/ng-template" id="/login.html">
@@ -262,7 +259,6 @@
             </div>
         </div>
     </script>
-    
 
     <script src="common/nav/navigation.js"></script>
     <script src="common/auth/authentication.js"></script>

@@ -12,7 +12,6 @@ a, a:hover, a:focus {
     text-decoration: none;
 }
 
-/* Buttons */
 /* Primary buttons */
 .btn-primary, .btn-add, .btn-comment, .btn-login, .btn-register, .btn-reply {
     background-color: #365981;
@@ -63,7 +62,9 @@ a, a:hover, a:focus {
 /* All buttons */
 .btn {
     padding: 10px 20px;
-    font-size: 0.875rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
     border-radius: 4px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     border-radius: 20px;
@@ -76,191 +77,81 @@ a, a:hover, a:focus {
 
 /* end of buttons */
 
-/* Navbar Styles */
 /* Navbar Brand and Links Styling */
 .navbar {
-    background-color: #f8f9fa; /* Light background for the navbar */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    font-family: 'Nunito Sans', sans-serif;
+    padding-top: 1rem; /* Top padding */
+    padding-bottom: 1rem; /* Bottom padding */
+    background-color: #365981 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: 'Arial', sans-serif !important;
 }
 
-.navbar-brand {
-    color: #365981; /* Brand color */
+.navbar-brand, .nav-link, .navbar .navbar-brand, .navbar .nav-link {
+    color: #A0E6D6;
     font-weight: bold;
+    transition: color 0.2s;
 }
 
-.nav-link {
-    color: #365981; /* Link color */
-    transition: color 0.3s ease-in-out;
+.navbar .navbar-brand:hover, .navbar .nav-link:hover {
+    color: #EAF1E0; 
 }
 
-.nav-link:hover, .navbar-brand:hover {
-    color: #2a456a; /* Darker shade on hover */
-}
-
-/* Dropdown Menu Styling */
-.dropdown-menu {
-    border-radius: 4px;
+/* Dropdown Styles */
+.navbar .dropdown-menu {
+    background-color: #365981;
     border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    display: none;
+    padding: 0.5rem 0;
+}
+
+.navbar .dropdown-menu.show {
+    opacity: 1;
+    display: block; 
 }
 
 .dropdown-item {
-    color: #333;
+    color: #A0E6D6;
+    transition: background-color 0.2s ease; 
 }
 
-.dropdown-item:hover {
-    background-color: #eaeaea; /* Light grey background on hover */
-    color: #365981; /* Change text color on hover */
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #365981; 
+    color: #ffffff;
 }
 
-/* Navbar Toggler Styling */
 .navbar-toggler {
+    border-color: rgba(150,123,183);
     border: none;
-    outline: none;
+}
+
+.nav-link {
+    color: #A0E6D6 !important;
+}
+
+.nav-link:hover {
+    color: #EAF1E0 !important;
 }
 
 .navbar-toggler-icon {
-    background-image: url('data:image/svg+xml,<svg fill="%23365981" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path stroke="rgba(255,255,255,0.5)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/></svg>'); /* Custom color */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
 }
 
-
-.card {
-    width: 100%; /* Use 100% of the column width */
-    max-width: 400px; /* Slightly larger card */
-    margin: 0 auto 20px; /* Centered with margin at the bottom */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #fff;
-    transition: transform 0.3s ease; /* Smooth transform transition */
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
-}
-
-.card-body {
-    padding: 15px;
-    padding-top: 20px;
-}
-
-.card .user-info {
-    display: flex;
-    justify-content: space-between; /* Adjust this to manage space between author and date */
-    align-items: center;
-    width: 100%;
-}
-
-.card .user-avatar {
-    font-size: 1.4rem; /* Adjusting the font size of the avatar for closer proximity */
-    color: #365981;
-    margin-right: 3px; /* Reduced space to the right of the avatar */
-}
-
-.card .user-name {
-    font-weight: none;
-    margin: 0; /* Removes additional margin */
-    font-size: 1rem; /* Adjust font size as needed */
-    color: #000;
-    flex-grow: 0; /* Allows the name to fill the space, pushing the date to the right */
-}
-
-.card .post-date {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-.card .post-date i {
-    margin-right: 5px;
-    font-size: 1rem;
-}
-
-/* Specific to titles */
-.card-title { 
-    color: #333; 
-    font-weight: 600;
-    margin-top: 1rem; /* Adjusted spacing */ 
-    margin-bottom: 0.5rem;
-  }
-
-/* Text and icon section */
-.card .card-text {
-    font-size: 1rem; /* Maintain readability */
-    margin-top: 0.5rem;
-    margin-bottom: 0.3rem !important; /* Space before the icons */
-}
-
-.icon-actions {
-    display: flex;
-    justify-content: flex-end; /* Align icons to the right */
-    padding-top: 0; /* Ensure there's space between text and icons */
-}
-
-@media (max-width: 768px) {
-    .card {
-        max-width: none; /* Full width on smaller screens */
-    }
-}
-
-/* Text and Icon area */
-.card-footer {
-    display: flex;     
-    justify-content: space-between; /* Manage space between author/date and icons */
-    align-items: center;
-    padding-top: 15px; /* Add padding at the bottom of the card */
-  }
-
-.icon-actions a {
-    display: inline-flex; /* Enables flexbox properties for the link */
-    align-items: center; /* Center aligns the icon vertically */
-    justify-content: center; /* Center aligns the icon horizontally */
-    width: 36px; /* Width of the clickable area */
-    height: 36px; /* Height of the clickable area */
-    border-radius: 50%; /* Makes the clickable area circular */
-    color: #365981; /* Default icon color */
-    background-color: transparent; /* Default background */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background and color */
-}
-.icon-link {
-    color: #365981;
-    font-size: 1.5rem; /* Slightly larger icons */
-    margin-left: 10px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.icon-actions a:hover {
-    color: #0fadac; /* Icon color on hover */
-}
-
-.icon-actions a {
-    color: #0077B6; /* Icon color */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.icon-actions a.delete:hover {
-    color: #dd1c3e;
-}
-
-.fas {
-    font-size: 1.4rem;
-    cursor: pointer; 
-}
+/* End of Navbar Styles */
 
 /* Title Styles for Uniformity */
 .page-header, .form-header {
-    margin-left: 10px;     /* Ensures all titles start at the same point */
-    font-size: 28px;    /* Consistent font size */
-    font-weight: bold;  /* Makes the titles bold */
-    color: #000;     /* Uniform color for titles */
-    padding-bottom: 24px; /* Space below the title */
+    margin-left: 10px;     
+    font-size: 28px;   
+    font-weight: bold;  
+    color: #000;     
+    padding-bottom: 24px;
     padding-top: 30px;
-    display: block;    /* Ensures the title is a block element */
+    display: block;    
 }
 
-/* Ensure the Add, Edit, and Delete pages titles are aligned correctly */
 .form-header {
     font-size: 1.75rem;
     color: #365981;
@@ -274,7 +165,7 @@ a, a:hover, a:focus {
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: 1px solid #ddd; /* Adds a subtle border */
+    border: 1px solid #ddd;
 }
 
 /* Utility classes for margins and padding */
@@ -328,13 +219,6 @@ a, a:hover, a:focus {
     display: block;
 }
 
-/* .form-actions button[type="submit"], .form-actions a {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 10px; /* Space between buttons 
-} */
-
 /* Specific Styles for Delete Page */
 .delete-warning {
     color: #dc3545;
@@ -343,68 +227,47 @@ a, a:hover, a:focus {
     text-align: center;
 }
 
-/* Adjusting the readonly inputs and textareas to appear less editable */
 .form-container input[readonly], .form-container textarea[readonly] {
     background-color: #e9ecef;
     opacity: 1;
 }
 
 .jumbotron {
-    padding: 60px 30px; /* Increases padding */
-    margin-top: 30px; /* Adds some space at the top */
-    background-color: rgba(255, 255, 255, 0.9); /* Light background with a bit of transparency */
-    border-radius: 15px; /* Softens the corners */
-    color: #333; /* Dark text for readability */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    padding: 60px 30px;
+    margin-top: 30px; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 15px; 
+    color: #333; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
 
 .jumbotron h1, .jumbotron p {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight text shadow for better legibility */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
 .jumbotron .btn {
-    background-color: #A0e6d6; /* Custom button color */
+    background-color: #A0e6d6; 
     color: #365981;
     border: none;
-    padding: 10px 20px; /* Larger button padding */
-    font-size: 18px; /* Larger font size */
-    border-radius: 8px; /* Rounded button edges */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Button shadow for depth */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for hover effects */
+    padding: 10px 20px; 
+    font-size: 18px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+    transition: background-color 0.3s, box-shadow 0.3s; 
 }
 
 .jumbotron .btn:hover, .jumbotron .btn:focus {
-    background-color: #365981; /* Lighter color on hover/focus */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Slightly larger shadow on hover/focus for a "lifting" effect */
+    background-color: #365981; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
     color: #a0e6d6;
     text-decoration: none;
     border: none;
 }
 
 .jumbotron .btn-primary:hover {
-    background-color: #365981; /* Custom button color */
+    background-color: #365981; 
 }
 
-/* Footer Styles */
-footer {
-    background-color: #003366;
-    color: #ffffff;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 16px;
-    bottom: 0;
-    width: 100%;
-}
-
-.title-text-divider {
-    border-top: 2px solid #FB7941; /* Light grey color for a soft divider */
-    margin-top: 0rem; /* Reduced top margin for close spacing to the title */
-    margin-bottom: 1.5rem; /* Larger bottom margin to separate title from text */
-}
-
-
-
-/* Comments Section */
 /* General Styles for the Blog View and Comments */
 .blog-view-container {
     background: #fff;
@@ -455,14 +318,14 @@ footer {
 }
 
 .comment-author-info .material-icons {
-    font-size: 2.5rem; /* Explicitly large for demonstration */
-    color: #007bff; /* Icon color */
-    margin-right: 10px; /* Space after the icon */
-    flex-shrink: 0; /* Prevents flexbox from shrinking the icon */
-    border-radius: 50%; /* Round the icons */
-    display: flex; /* Ensures items are flex-aligned */
-    justify-content: center; /* Horizontally centers the icon content */
-    align-items: center; /* Vertically centers the icon content */
+    font-size: 2.5rem; 
+    color: #007bff; 
+    margin-right: 10px;
+    flex-shrink: 0;
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 .comment-date {
@@ -476,7 +339,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: 50px; /* Aligns with the username */
+    margin-left: 50px;
 }
 
 .comment-actions .reactions {
@@ -504,7 +367,7 @@ footer {
 
 /* Comment Text Styling */
 .comment-text {
-    margin-left: 59px; /* Aligns with the username */
+    margin-left: 59px; 
     font-size: 1rem;
     color: #333;
 }
@@ -532,7 +395,7 @@ footer {
 
 /* Reply Indentation */
 .reply-item {
-    margin-left: 50px; /* Indent reply to the right */
+    margin-left: 50px;
     background-color: #e9ecef;
     margin-top: 10px;
     margin-left:50px;
@@ -545,16 +408,14 @@ footer {
     overflow-wrap: break-word;
 }
 
-/* Adjust Reply Form Alignment */
+/* Reply Form Styles */
 .reply-form {
     margin-top: 20px;
     margin-left: 57px;
-    /* Indent to align with the like/dislike buttons */
 }
 
-/* Ensure Reply Form Text Doesn't Overflow */
 .reply-form textarea {
-    width: calc(100% - 5px); /* Full width minus indent and padding */
+    width: calc(100% - 5px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -584,8 +445,8 @@ footer {
 .reply-link {
     padding: 6px;
     margin-right: 5px;
-    border-radius: 50%; /* Pre-define a border-radius for a smooth transition */
-    transition: background-color 0.3s ease; /* Smooth transition for the background color */
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
 /* Icon Styling */
@@ -594,48 +455,48 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px; /* Set a specific size for icons */
-    height: 35px; /* Set a specific size for icons */
-    border-radius: 60%; /* Make the icons round */
+    width: 35px; 
+    height: 35px; 
+    border-radius: 60%; 
 }
 
 /* Apply hover only to icons */
 .comment-actions button i:hover,
 .reply-link i:hover {
-    background-color: rgba(0, 123, 255, 0.2); /* Light blue background on hover */
+    background-color: rgba(0, 123, 255, 0.2);
 }
 
 /* Remove transition effect on the span */
 .comment-actions button span {
-    transition: none; /* No transition effect */
+    transition: none;
 }
 
 /* Comments title with a line */
 .comments-title {
     display: flex;
     align-items: center;
-    white-space: nowrap; /* Prevents the title from wrapping to the next line */
-    margin-bottom: 1.5rem; /* Adds some space below the title */
+    white-space: nowrap; 
+    margin-bottom: 1.5rem;
     margin-top: 5rem;
-    font-size: 1.5rem; /* Large font size for visibility */
+    font-size: 1.5rem; 
     color: #333;
 }
 
 /* Styling for the Reply link with hover effect */
 .reply-link {
-    color: #007bff; /* Primary color for interactive elements */
-    cursor: pointer; /* Indicates an actionable item */
+    color: #007bff; 
+    cursor: pointer; 
     display: flex;
-    align-items: center; /* Ensures vertical alignment with icons */
-    padding: 5px 10px; /* Padding around the text for better clickability */
-    border-radius: 30px; /* Optional: rounds the corners */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+    align-items: center;
+    padding: 5px 10px; 
+    border-radius: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .reply-link:hover {
-    background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
-    color: #0056b3; /* Darker blue on hover for visual feedback */
-    text-decoration: none; /* Underline to indicate it is clickable */
+    background-color: rgba(0, 123, 255, 0.1); 
+    color: #0056b3;
+    text-decoration: none;
 }
 
 
@@ -643,15 +504,16 @@ footer {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    font-size: 30px; /* Adjust font size as needed */
+    font-size: 30px; 
 }
 
 .title-with-line:after {
     content: '';
     flex-grow: 1;
-    height: 1.5px; /* Line thickness */
-    background-color: #365981; /* Line color */
-    margin-left: 10px; /* Space between text and line */
+    height: 1.5px; 
+    background-color: #365981; 
+    margin-left: 10px; 
+    opacity: 0.5; 
 }
 
 /* Utility Classes */
@@ -666,20 +528,20 @@ footer {
 .blog-metadata {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Space between author and date */
-    font-size: 1rem; /* Smaller font size for metadata */
-    color: #666; /* Subdued color for metadata */
+    gap: 1rem; 
+    font-size: 1rem; 
+    color: #666; 
 }
 
 .author-name, .publish-date {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Space between icon and text */
+    gap: 0.5rem; 
 }
 
 .author-name i, .publish-date i {
-    font-size: 1.2rem; /* Slightly larger icons to stand out */
-    color: #365981; /* Theme color for icons */
+    font-size: 1.2rem; 
+    color: #365981;
 }
 
 /* Ensures that icons align nicely with the text */
@@ -690,11 +552,9 @@ footer {
 /* Add a subtle border below the blog metadata for visual separation */
 .blog-metadata {
     border-bottom: 1px solid #eaeaea;
-    padding-bottom: 1rem; /* Padding below the metadata before the border */
-    margin-bottom: 1rem; /* Space below the border before the content */
+    padding-bottom: 1rem; 
+    margin-bottom: 1rem; 
 }
-
-
 
 /* Specific styles for authentication forms */
 .auth-form-container .form-container {
@@ -779,7 +639,6 @@ footer {
     margin-top: 1rem;
 }
 
-
 /* Blog Meta Information Styling */
 .blog-meta {
     display: flex;
@@ -795,21 +654,31 @@ footer {
 
 .meta-info,
 .blog-actions {
-    display: flex; /* Aligns metadata items in a row */
-    gap: 8px; /* Space between metadata items */
+    display: flex;
+    gap: 8px;
 }
 
 .blog-meta strong {
-    font-weight: bold; /* Makes labels bold */
-    color: #365981; /* Theme color for emphasis */
-    margin-right: 5px; /* Space after labels */
+    font-weight: bold; 
+    color: #365981;
+    margin-right: 5px; 
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .blog-meta {
-        justify-content: center; /* Centers the metadata on smaller screens */
-        text-align: center; /* Ensures text aligns centrally */
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .meta-info {
+        flex-grow: 1; 
+    }
+
+    .blog-actions {
+        flex-grow: 1;
+        justify-content: flex-end; 
     }
 }
 
@@ -841,30 +710,30 @@ footer {
 }
 
 .blog-meta i {
-    font-size: 0.8rem; /* Set the icon size */
-    margin-right: 0.3rem; /* Space between icon and text */
+    font-size: 0.8rem; 
+    margin-right: 0.3rem; 
 }
 
 /* Style for the action icons under the blog text */
 .icon-actions {
     display: flex;
-    justify-content: flex-end; /* Aligns icons to the right */
-    gap: 10px; /* Space between icons */
+    justify-content: flex-end; 
+    gap: 10px; 
 }
 
 .blog-meta, .icon-actions i {
-    font-size: 0.8rem; /* Adjusts icon size */
+    font-size: 0.8rem; 
 }
 
 .blog-actions a {
-    color: #666; /* Default icon color */
+    color: #666; 
     transition: color 0.2s ease;
 }
 
 .blog-actions a:hover {
-    color: #365981; /* Darker on hover for visual feedback */
+    color: #365981; 
 }
 
 .blog-actions a[title="Delete"]:hover {
-    color: #a71d2a; /* Darker red on hover */
+    color: #a71d2a;
 }

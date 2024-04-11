@@ -69,7 +69,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 }]);
 
-
 //Service for API calls
 app.service('BlogService', ['$http', 'authentication', function ($http, authentication) {
     var apiBaseUrl = '/api/blogs';
@@ -128,7 +127,7 @@ app.service('BlogService', ['$http', 'authentication', function ($http, authenti
 app.controller('HomeController', [function () {
     var vm = this;
     vm.title = 'Ganga Acharya Blogsite';
-    vm.message = 'Blogsite for Web Development class';
+    vm.message = 'This is my blogsite for Web Development class at Millersville University';
 }]);
 
 //Controller for listing blogs
@@ -179,7 +178,7 @@ app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication
         vm.newReplyTexts[commentId] = '';  // Clear the textarea
         var commentIndex = vm.blog.comments.findIndex(c => c._id === commentId);
         if(commentIndex >= 0) {
-            vm.blog.comments[commentIndex].showReply = false;  // Optionally hide the reply form
+            vm.blog.comments[commentIndex].showReply = false;
         }
     };
 

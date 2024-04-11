@@ -105,7 +105,7 @@ const renderBlogList = function(req, res, responseBody) {
     return blogs;
 };
 
-// GET /api/blogs - Using async/await and renderBlogList for formatting
+// GET /api/blogs
 module.exports.blogList = async function (req, res) {
     console.log("Getting blogList");
 

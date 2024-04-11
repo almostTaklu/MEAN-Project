@@ -16,10 +16,14 @@
                 <li class="nav-item" ng-show="!vm.isLoggedIn()">
                     <a class="nav-link" ui-sref="login">Sign In</a>
                 </li>
-
-                <li class="nav-item" ng-show="vm.isLoggedIn()">
-                    <!-- Logout doesn't need a state, using ng-click is fine -->
-                    <a class="nav-link" href="" ng-click="vm.logout()">Logout <small>({{ vm.currentUser().email }})</small></a>
+                <!-- User Account Dropdown -->
+                <li class="nav-item dropdown" ng-show="vm.isLoggedIn()">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ vm.currentUser().name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="" ng-click="vm.logout()">Logout</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

@@ -1,36 +1,90 @@
+/* General Styles */
 body {
-    font: 16px 'Nunito Sans', sans-serif;
-    background-color: #f7f8fc;
-    color: #333;
+    font-family: 'Roboto', sans-serif; /* Modern Sans-Serif font */
+    background-color: #f9fafc; 
+    color: #444; 
     margin: 0;
     padding: 0;
 }
-a{
-    color:#365981;
-    text-decoration: none;
-    font-weight: bold;
-}
 
-a:hover {
-    color: #0077B6;
-    text-decoration: none;
-}
-.btn-primary {
-    color: #fff;
+a, a:hover, a:focus {
+    color: #365981; /* Primary color */
     text-decoration: none;
 }
 
-.btn-primary:hover {
+/* Primary buttons */
+.btn-primary, .btn-add, .btn-comment, .btn-login, .btn-register, .btn-reply {
     background-color: #365981;
-    color: #A0E6D6;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.btn-primary:hover, .btn-add:hover, .btn-comment:hover, .btn-login:hover, .btn-register:hover, .btn-reply:hover {
+    background-color: #2a456a;
+}
+
+/* Cancel buttons */
+.btn-cancel, .btn-primary-outline {
+    background-color: transparent;
+    border-radius: 20px;
+    color: #333;
+    border: none;
+}
+
+.btn-cancel:hover, .btn-primary-outline:hover {
+    background-color: lightgray;
+    color: #333;
+}
+
+/* Edit buttons */
+.btn-edit {
+    background-color: #34a4eb;
+    color: #fff;
+    border: none;
+}
+
+.btn-edit:hover {
+    background-color: #2793e6;
+}
+
+/* Delete buttons */
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* All buttons */
+.btn {
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+}
+
+.unclickable {
+    pointer-events: none; /* Prevents clicking */
+    opacity: 0.6; /* Fades the button to indicate it's not interactive */
+}
+
+/* end of buttons */
+
+/* Navbar Brand and Links Styling */
 .navbar {
+    padding-top: 1rem; /* Top padding */
+    padding-bottom: 1rem; /* Bottom padding */
     background-color: #365981 !important;
-    padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 17px;
-    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif !important;
 }
 
 .navbar-brand, .nav-link, .navbar .navbar-brand, .navbar .nav-link {
@@ -40,7 +94,32 @@ a:hover {
 }
 
 .navbar .navbar-brand:hover, .navbar .nav-link:hover {
-    color: #EAF1E0;
+    color: #EAF1E0; 
+}
+
+/* Dropdown Styles */
+.navbar .dropdown-menu {
+    background-color: #365981;
+    border: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    display: none;
+    padding: 0.5rem 0;
+}
+
+.navbar .dropdown-menu.show {
+    opacity: 1;
+    display: block; 
+}
+
+.dropdown-item {
+    color: #A0E6D6;
+    transition: background-color 0.2s ease; 
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #365981; 
+    color: #ffffff;
 }
 
 .navbar-toggler {
@@ -48,138 +127,75 @@ a:hover {
     border: none;
 }
 
+.nav-link {
+    color: #A0E6D6 !important;
+}
+
+.nav-link:hover {
+    color: #EAF1E0 !important;
+}
+
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
 }
 
-.card {
-    width: 100%; /* Use 100% of the column width */
-    max-width: 380px; /* Slightly larger card */
-    margin: 0 auto 20px; /* Centered with margin at the bottom */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #fff;
-    transition: transform 0.3s ease; /* Smooth transform transition */
+/* End of Navbar Styles */
+
+/* Title Styles for Uniformity */
+.page-header, .form-header {
+    margin-left: 10px;     
+    font-size: 28px;   
+    font-weight: bold;  
+    color: #000;     
+    padding-bottom: 24px;
+    padding-top: 30px;
+    display: block;    
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
-}
-
-.card-body {
-    padding: 15px;
-    padding-top: 20px;
-}
-
-.card .user-info {
-    display: flex;
-    justify-content: space-between; /* Adjust this to manage space between author and date */
-    align-items: center;
-    width: 100%;
-}
-
-.card .user-avatar {
-    font-size: 1.4rem; /* Adjusting the font size of the avatar for closer proximity */
+.form-header {
+    font-size: 1.75rem;
     color: #365981;
-    margin-right: 3px; /* Reduced space to the right of the avatar */
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
-.card .user-name {
-    font-weight: none;
-    margin: 0; /* Removes additional margin */
-    font-size: 1rem; /* Adjust font size as needed */
-    color: #000;
-    flex-grow: 0; /* Allows the name to fill the space, pushing the date to the right */
-}
-
-.card .post-date {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-.card .post-date i {
-    margin-right: 5px;
-    font-size: 1rem;
-}
-
-
-/* Title spacing */
-.card .card-title {
-    display: block;
-    font-size: 1.25rem; /* Adjusted font size for better visibility */
-    font-weight: bold; /* Make sure the title is bold */
-    color: #333; /* Ensure the color is set correctly for visibility */
-    margin-top: 20px !important;
-    margin-bottom: 1rem !important;
-}
-
-
-/* Text and icon section */
-.card .card-text {
-    font-size: 1rem; /* Maintain readability */
-    margin-top: 0.5rem;
-    margin-bottom: 0.3rem !important; /* Space before the icons */
-}
-
-.icon-actions {
-    display: flex;
-    justify-content: flex-end; /* Align icons to the right */
-    padding-top: 0; /* Ensure there's space between text and icons */
-}
-
-@media (max-width: 768px) {
-    .card {
-        max-width: none; /* Full width on smaller screens */
-    }
-}
-
-.icon-actions a {
-    display: inline-flex; /* Enables flexbox properties for the link */
-    align-items: center; /* Center aligns the icon vertically */
-    justify-content: center; /* Center aligns the icon horizontally */
-    width: 36px; /* Width of the clickable area */
-    height: 36px; /* Height of the clickable area */
-    border-radius: 50%; /* Makes the clickable area circular */
-    color: #365981; /* Default icon color */
-    background-color: transparent; /* Default background */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background and color */
-}
-.icon-link {
-    color: #365981;
-    font-size: 1.5rem; /* Slightly larger icons */
-    margin-left: 10px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.icon-actions a:hover {
-    color: #0fadac; /* Icon color on hover */
-}
-
-.icon-actions a {
-    color: #0077B6; /* Icon color */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.icon-actions a.delete:hover {
-    color: #dd1c3e;
-}
-
-.fas {
-    font-size: 1.4rem;
-    cursor: pointer; 
-}
-
-.edit-blog-container, .form-container, .jumbotron {
-    max-width: auto;
-    margin: 40px auto;
+/* Adjustments for titles to be outside the form boxes */
+.form-container {
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
-    color: #333;
     background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+/* Utility classes for margins and padding */
+.mt-5 { margin-top: 3rem; }
+.text-center { text-align: center; }
+
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
 }
 
 .jumbotron .btn:hover, .jumbotron .btn:focus, .jumbotron .btn-primary:hover {
@@ -187,50 +203,10 @@ a:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Specific Styles for Edit Page */
-.edit-blog-container {
-    max-width: 800px;
-    margin: 40px auto; /* Increase top and bottom margin */
-    padding: 40px; /* Increase padding for more space inside */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* More pronounced shadow */
-    border-radius: 8px; /* Ensure there's a border-radius */
-    color: #333;
-    background-color: #fff; /* Background color */
-    border: 1px solid #ddd; /* Optional: adds a subtle border for depth */
-}
-
-.edit-blog-header {
-    margin-bottom: 30px;
-    text-align: center;
-}
-.edit-form .form-group {
-    margin-bottom: 25px;
-}
-.edit-form label {
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: block;
-}
 .edit-form button[type="submit"] {
     width: 100%;
     padding: 10px;
     font-size: 18px;
-}
-
-/* Common Styles for Edit and Delete Pages */
-.form-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    color: #333;
-    background-color: #fff;
-}
-
-.form-header {
-    margin-bottom: 30px;
-    text-align: center;
 }
 
 .form-body .form-group {
@@ -243,13 +219,6 @@ a:hover {
     display: block;
 }
 
-.form-actions button[type="submit"], .form-actions a {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 10px; /* Space between buttons */
-}
-
 /* Specific Styles for Delete Page */
 .delete-warning {
     color: #dc3545;
@@ -258,61 +227,513 @@ a:hover {
     text-align: center;
 }
 
-/* Adjusting the readonly inputs and textareas to appear less editable */
 .form-container input[readonly], .form-container textarea[readonly] {
     background-color: #e9ecef;
     opacity: 1;
 }
 
 .jumbotron {
-    padding: 60px 30px; /* Increases padding */
-    margin-top: 30px; /* Adds some space at the top */
-    background-color: rgba(255, 255, 255, 0.9); /* Light background with a bit of transparency */
-    border-radius: 15px; /* Softens the corners */
-    color: #333; /* Dark text for readability */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    padding: 60px 30px;
+    margin-top: 30px; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 15px; 
+    color: #333; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
 
 .jumbotron h1, .jumbotron p {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slight text shadow for better legibility */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
 .jumbotron .btn {
-    background-color: #A0e6d6; /* Custom button color */
+    background-color: #A0e6d6; 
     color: #365981;
     border: none;
-    padding: 10px 20px; /* Larger button padding */
-    font-size: 18px; /* Larger font size */
-    border-radius: 8px; /* Rounded button edges */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Button shadow for depth */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for hover effects */
+    padding: 10px 20px; 
+    font-size: 18px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+    transition: background-color 0.3s, box-shadow 0.3s; 
 }
 
 .jumbotron .btn:hover, .jumbotron .btn:focus {
-    background-color: #365981; /* Lighter color on hover/focus */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Slightly larger shadow on hover/focus for a "lifting" effect */
+    background-color: #365981; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
     color: #a0e6d6;
     text-decoration: none;
     border: none;
 }
 
 .jumbotron .btn-primary:hover {
-    background-color: #365981; /* Custom button color */
+    background-color: #365981; 
 }
 
-/* Footer Styles */
-footer {
-    background-color: #003366;
-    color: #ffffff;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 16px;
-    bottom: 0;
+/* General Styles for the Blog View and Comments */
+.blog-view-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color:#666;
+}
+
+.blog-view-container h1, .comments-title {
+    color: #333;
+}
+
+.blog-view-container p {
+    color: #666;
+    word-wrap: break-word;
+}
+
+/* Comment List Styles */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.comment-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.comment-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.comment-author-info .material-icons {
+    font-size: 2.5rem; 
+    color: #007bff; 
+    margin-right: 10px;
+    flex-shrink: 0;
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.comment-date {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* Button Styling */
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+.comment-actions .reactions {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #365981;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 5px;
+}
+
+.comment-actions .reactions:hover {
+    color: #2a456a;
+}
+
+.comment-actions .reactions:disabled {
+    color: #ccc;
+}
+
+.comment-actions i {
+    margin-right: 5px;
+}
+
+/* Comment Text Styling */
+.comment-text {
+    margin-left: 59px; 
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Textarea and Form Styles */
+.comment-form, .reply-form {
+    margin-top: 3rem;
+}
+
+.comment-form textarea {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 80px;
+    resize: vertical;
+    font-size: 1rem;
 }
 
-.title-text-divider {
-    border-top: 2px solid #FB7941; /* Light grey color for a soft divider */
-    margin-top: 0rem; /* Reduced top margin for close spacing to the title */
-    margin-bottom: 1.5rem; /* Larger bottom margin to separate title from text */
+/* Reply List Styles */
+.reply-list {
+    list-style: none;
+    padding-left: 10px;
+}
+
+/* Reply Indentation */
+.reply-item {
+    margin-left: 50px;
+    background-color: #e9ecef;
+    margin-top: 10px;
+    margin-left:50px;
+    padding: 10px;
+    border-left: 3px solid #007bff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #555;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Reply Form Styles */
+.reply-form {
+    margin-top: 20px;
+    margin-left: 57px;
+}
+
+.reply-form textarea {
+    width: calc(100% - 5px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+
+.reply-date {
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: 10px;
+}
+
+/* Styling for Link to Login */
+.login-link {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Button Styling */
+.comment-actions button,
+.reply-link {
+    padding: 6px;
+    margin-right: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+/* Icon Styling */
+.comment-actions button i,
+.reply-link i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px; 
+    height: 35px; 
+    border-radius: 60%; 
+}
+
+/* Apply hover only to icons */
+.comment-actions button i:hover,
+.reply-link i:hover {
+    background-color: rgba(0, 123, 255, 0.2);
+}
+
+/* Remove transition effect on the span */
+.comment-actions button span {
+    transition: none;
+}
+
+/* Comments title with a line */
+.comments-title {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    margin-bottom: 1.5rem;
+    margin-top: 5rem;
+    font-size: 1.5rem; 
+    color: #333;
+}
+
+/* Styling for the Reply link with hover effect */
+.reply-link {
+    color: #007bff; 
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+    padding: 5px 10px; 
+    border-radius: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reply-link:hover {
+    background-color: rgba(0, 123, 255, 0.1); 
+    color: #0056b3;
+    text-decoration: none;
+}
+
+
+.title-with-line {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 30px; 
+}
+
+.title-with-line:after {
+    content: '';
+    flex-grow: 1;
+    height: 1.5px; 
+    background-color: #365981; 
+    margin-left: 10px; 
+    opacity: 0.5; 
+}
+
+/* Utility Classes */
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.blog-metadata {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    font-size: 1rem; 
+    color: #666; 
+}
+
+.author-name, .publish-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
+}
+
+.author-name i, .publish-date i {
+    font-size: 1.2rem; 
+    color: #365981;
+}
+
+/* Ensures that icons align nicely with the text */
+.material-icons {
+    vertical-align: middle;
+}
+
+/* Add a subtle border below the blog metadata for visual separation */
+.blog-metadata {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem; 
+    margin-bottom: 1rem; 
+}
+
+/* Specific styles for authentication forms */
+.auth-form-container .form-container {
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin: 2rem auto;
+}
+
+.auth-form-container .form-header {
+    font-size: 1.75rem;
+    color: #365981;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-form-container .form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form-container .form-group input,
+.auth-form-container .form-group textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s;
+}
+
+.auth-form-container .form-group input:focus,
+.auth-form-container .form-group textarea:focus {
+    border-color: #365981;
+    background-color: #fff;
+    outline: none;
+}
+
+.auth-form-container .form-actions {
+    margin-top: 1.5rem;
+}
+
+.auth-form-container .btn-login, .btn-register {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    background-color: #365981;
+    border-radius: 4px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.auth-form-container .btn-login:hover, .btn-register:hover {
+    background-color: #2a456a;
+}
+
+.auth-form-container p.text-center {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.auth-form-container p.text-center a {
+    color: #365981;
+    font-weight: bold;
+}
+
+/* Enhance button hover effects */
+.auth-form-container .btn-login:hover, .btn-register:hover,
+.auth-form-container .btn-login:focus, .btn-register:focus {
+    background-color: #2a456a;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+
+.auth-form-container .alert {
+    margin-top: 1rem;
+}
+
+/* Blog Meta Information Styling */
+.blog-meta {
+    display: flex;
+    max-height: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.meta-info,
+.blog-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.blog-meta strong {
+    font-weight: bold; 
+    color: #365981;
+    margin-right: 5px; 
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .blog-meta {
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .meta-info {
+        flex-grow: 1; 
+    }
+
+    .blog-actions {
+        flex-grow: 1;
+        justify-content: flex-end; 
+    }
+}
+
+/* Blog card styling for a modern look */
+.blog-card {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for blog excerpt text */
+.blog-excerpt {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Divider between text and metadata */
+.blog-text-divider {
+    border-bottom: 1px dashed #cee1f8;
+    margin-bottom: 20px;
+}
+
+.blog-meta i {
+    font-size: 0.8rem; 
+    margin-right: 0.3rem; 
+}
+
+/* Style for the action icons under the blog text */
+.icon-actions {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 10px; 
+}
+
+.blog-meta, .icon-actions i {
+    font-size: 0.8rem; 
+}
+
+.blog-actions a {
+    color: #666; 
+    transition: color 0.2s ease;
+}
+
+.blog-actions a:hover {
+    color: #365981; 
+}
+
+.blog-actions a[title="Delete"]:hover {
+    color: #a71d2a;
 }

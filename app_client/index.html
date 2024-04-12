@@ -116,7 +116,7 @@
                             </span>
                         </div>
                         <div ng-show="comment.showReply" class="reply-form">
-                            <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea" required></textarea>
+                            <textarea ng-model="vm.newReplyTexts[comment._id]" placeholder="Write a reply..." class="reply-textarea" required minlength="1"></textarea>
                             <button ng-click="vm.addReply(comment._id)" class="btn btn-secondary btn-reply">Reply</button>
                             <button ng-click="vm.cancelReply(comment._id)" class="btn btn-primary-outline btn-cancel">Cancel</button>
                         </div>

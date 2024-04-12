@@ -50,11 +50,13 @@
                 <div class="row g-4">
                     <div ng-repeat="blog in vm.blogs" class="col-lg-4 col-md-6">
                         <div class="blog-card h-100 shadow-sm">
-                            <h4 class="card-title mt-2 mb-3">
-                                <a ui-sref="blogView({blogid: blog._id})" class="text-decoration-none">{{ blog.blogTitle }}</a>
-                            </h4>
-                            <p class="blog-excerpt">{{ blog.blogText | limitTo: 150 }}...</p>
-                            <div class="blog-text-divider"></div>
+                            <div class="blog-content">
+                                <h4 class="card-title mt-2 mb-3">
+                                    <a ui-sref="blogView({blogid: blog._id})" class="text-decoration-none">{{ blog.blogTitle }}</a>
+                                </h4>
+                                <p class="blog-excerpt">{{ blog.blogText | limitTo: 100 }}...</p>
+                                <div class="blog-text-divider"></div>
+                            </div>
                             <div class="blog-meta">
                                 <div class="meta-info">
                                     <span class="blog-date"><i class="fas fa-calendar-alt"></i> {{ blog.createdOn | date:'mediumDate' }}</span> | 
@@ -70,9 +72,9 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
                     </div>
+                    
+                    
                     <!-- Message when there are no blogs -->
                     <div ng-if="!vm.blogs.length" class="col-12 text-center">
                         <p class="mt-5">There are no posts yet. <a ui-sref="blogAdd" class="text-decoration-none">Click here</a> to add a new post.</p>

@@ -160,7 +160,7 @@ app.controller('ListController', ['BlogService', 'authentication',
     }]);
 
 // Controller for viewing a blog
-app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication', '$interval', function ViewController($stateParams, BlogService, authentication, $interval) {
+app.controller('ViewController', ['$stateParams', 'BlogService', 'authentication', '$interval', '$timeout', function ViewController($stateParams, BlogService, authentication, $interval, $timeout) {
     var vm = this;
     vm.blog = { comments: [] };
     vm.newCommentText = '';

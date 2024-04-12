@@ -639,17 +639,50 @@ a, a:hover, a:focus {
     margin-top: 1rem;
 }
 
-/* Blog Meta Information Styling */
+/* Blog Card Styling for Consistent Layout */
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensuring content pushes metadata and actions to the bottom */
+.blog-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.blog-excerpt {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem; /* Adjust as needed */
+}
+
+/* Divider between text and metadata */
+.blog-text-divider {
+    border-bottom: 1px dashed #cee1f8;
+    margin-bottom: 1rem;
+}
+
+/* Styling for metadata and actions */
 .blog-meta {
     display: flex;
-    max-height: 100%;
-    overflow: hidden;
     justify-content: space-between;
     align-items: center;
     color: #666;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 0;
+    font-size: 0.85rem;
 }
 
 .meta-info,
@@ -658,82 +691,33 @@ a, a:hover, a:focus {
     gap: 8px;
 }
 
-.blog-meta strong {
-    font-weight: bold; 
-    color: #365981;
-    margin-right: 5px; 
+/* Keeping the original hover and color styles */
+.blog-actions a {
+    color: #666; /* Default color */
+    transition: color 0.2s ease;
+}
+
+.blog-actions a:hover {
+    color: #365981; /* Color on hover */
+}
+
+.blog-actions a[title="Delete"]:hover {
+    color: #a71d2a; /* Red on hover for delete */
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .blog-meta {
-        flex-direction: row; 
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row;
+        align-items: flex-start;
     }
 
     .meta-info {
-        flex-grow: 1; 
+        margin-bottom: 8px; /* Adds space between metadata and actions on small screens */
     }
 
     .blog-actions {
-        flex-grow: 1;
-        justify-content: flex-end; 
+        justify-content: flex-start; /* Aligns actions to the start on smaller screens */
     }
 }
 
-/* Blog card styling for a modern look */
-.blog-card {
-    position: relative;
-    padding: 20px;
-    border-radius: 10px;
-    background: #ffffff;
-    margin-bottom: 0;
-    transition: all 0.3s ease;
-}
-
-.blog-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Styling for blog excerpt text */
-.blog-excerpt {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-/* Divider between text and metadata */
-.blog-text-divider {
-    border-bottom: 1px dashed #cee1f8;
-    margin-bottom: 20px;
-}
-
-.blog-meta i {
-    font-size: 0.8rem; 
-    margin-right: 0.3rem; 
-}
-
-/* Style for the action icons under the blog text */
-.icon-actions {
-    display: flex;
-    justify-content: flex-end; 
-    gap: 10px; 
-}
-
-.blog-meta, .icon-actions i {
-    font-size: 0.8rem; 
-}
-
-.blog-actions a {
-    color: #666; 
-    transition: color 0.2s ease;
-}
-
-.blog-actions a:hover {
-    color: #365981; 
-}
-
-.blog-actions a[title="Delete"]:hover {
-    color: #a71d2a;
-}

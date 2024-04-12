@@ -195,9 +195,11 @@
                         <p>Are you sure you want to delete this blog? This action cannot be undone.</p>
                     </div>
                     <div class="form-group">
+                        <label for="blogTitle">Blog Title</label>
                         <input readonly class="form-control" id="title" ng-model="vm.blog.blogTitle">
                     </div>
                     <div class="form-group">
+                        <label for="blogText">Content</label>
                         <textarea readonly class="form-control" id="entry" rows="5" ng-model="vm.blog.blogText"></textarea>
                     </div>
                     <button type="submit" class="btn btn-danger btn-delete">Delete</button>

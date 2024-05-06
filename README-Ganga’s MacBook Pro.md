@@ -32,7 +32,7 @@ Create a `.env` file in the root dectory and update it your MongoDB URI and any 
 ```DB_URI=mongodb://<username>:<password>@localhost/<DB>
     JWT_SECRET=secret```
 
-Replace `<username>`, `<password>`, and `<DB>` with your actual MongoDB credentials and database name.
+Replace `<username>
 
 `secret` can any string.
 

@@ -17,11 +17,11 @@ Before you begin, ensure you have the following installed on your system:
 * Angular CLI
 
 ## Installation
-T0 get the the Blogger App running locally, follow these steps:
+To get the the Blogger App running locally, follow these steps:
 
 #### Clone the repository
-` git clone https://github.com/almostTaklu/MEAN-Project.git'
-`cd MEAN-Project'
+``` git clone https://github.com/almostTaklu/MEAN-Project.git```
+cd MEAN-Project```
 
 #### Install dependencies
 ```npm install```

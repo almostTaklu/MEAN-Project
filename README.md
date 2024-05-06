@@ -3,7 +3,7 @@
 Welcome to the Blogger App, a simple and intutive blogging platform built using the MEAN Stack (MongoDB,
 Express, Angular, and Node.js) and adhering to the MCV (Model-View-Controller) architecture. This application allows users to manage blog posts and interact through comments and reasions.
 
-## Featrues
+## Features
 * User Authentication: Secure login and registration functionality to manage personal accounts.
 * Blog Management: Users can add, edit, and delete their blog posts
 * Comments and Reactions: Ability to add comments to post and react to these comments

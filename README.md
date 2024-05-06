@@ -20,15 +20,15 @@ Before you begin, ensure you have the following installed on your system:
 To get the the Blogger App running locally, follow these steps:
 
 #### Clone the repository
-``` git clone https://github.com/almostTaklu/MEAN-Project.git```
-```cd MEAN-Project```
+``` git clone https://github.com/almostTaklu/MEAN-Project.git```\
+``` cd MEAN-Project```
 
 #### Install dependencies
 ```npm install```
 
 #### Set up the environment variables
 Create a `.env` file in the root dectory and update it your MongoDB URI and any other configurations you might need:
-```DB_URI=mongodb://<username>:<password>@localhost/<DB>```
+```DB_URI=mongodb://<username>:<password>@localhost/<DB>```\
 ```JWT_SECRET=<Your_Secret_code>```
 
 #### Run the application

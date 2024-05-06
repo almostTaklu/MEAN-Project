@@ -21,7 +21,7 @@ To get the the Blogger App running locally, follow these steps:
 
 #### Clone the repository
 ``` git clone https://github.com/almostTaklu/MEAN-Project.git```
-cd MEAN-Project```
+```cd MEAN-Project```
 
 #### Install dependencies
 ```npm install```

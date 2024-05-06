@@ -30,7 +30,7 @@ To get the the Blogger App running locally, follow these steps:
 Create a `.env` file in the root dectory and update it your MongoDB URI and any other configurations you might need:\
 \
 ```DB_URI=mongodb://<username>:<password>@localhost/<DB>```\
-```JWT_SECRET=secret```
+```JWT_SECRET=secret``` \
 \ 
 `secret` can any string.
 

@@ -27,7 +27,7 @@ To get the the Blogger App running locally, follow these steps:
 ```npm install```
 
 #### Set up the environment variables
-Create a `.env` file in the root dectory and update it your MongoDB URI and any other configurations you might need:
+Create a `.env` file in the root dectory and update it your MongoDB URI and any other configurations you might need:\
 ```DB_URI=mongodb://<username>:<password>@localhost/<DB>```\
 ```JWT_SECRET=<Your_Secret_code>```
 

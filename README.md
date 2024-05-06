@@ -31,6 +31,7 @@ Create a `.env` file in the root dectory and update it your MongoDB URI and any 
 \
 ```DB_URI=mongodb://<username>:<password>@localhost/<DB>```\
 ```JWT_SECRET=secret``` \
+
 `secret` can any string.
 
 #### Run the application
